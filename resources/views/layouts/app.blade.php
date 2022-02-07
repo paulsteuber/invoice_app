@@ -52,7 +52,7 @@
                             
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Registrieren') }}</a>
                                 </li>
                             @endif
                         @else
@@ -62,8 +62,8 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('profile') }}">{{_('Company Settings')}}</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="dropdown-item" href="{{ route('profile') }}">{{_('Geschäftsinformationen')}}</a>
+                                    <a class="dropdown-item logout" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
@@ -89,20 +89,20 @@
                     <a type="button" class="btn btn-secondary" href="{{route('home')}}">{{__("Dashboard")}}</a>
                     <div class="btn-group" role="group">
                         <a id="btnGroupInvoices" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        {{__("Invoices")}}
+                        {{__("Rechnungen")}}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="btnGroupInvoices">
-                        <li><a class="dropdown-item" href="{{ route('invoice.index')}}">{{__("All Invoices")}} </a></li>
-                        <li><a class="dropdown-item" href="{{ route('invoice.create')}}">{{__("Add New Invoice")}} </a></li>
+                        <li><a class="dropdown-item" href="{{ route('invoice.index')}}">{{__("Alle Rechnungen")}} </a></li>
+                        <li><a class="dropdown-item" href="{{ route('invoice.create')}}">{{__("Neue Rechnung erstellen")}} </a></li>
                         </ul>
                     </div>
                     <div class="btn-group" role="group">
                         <a id="btnGroupCustomers" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        {{__("Customers")}}
+                        {{__("Kunden")}}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="btnGroupCustomers">
-                        <li><a class="dropdown-item" href="{{ route('customers')}}">{{__("All Customers")}} </a></li>
-                        <li><a class="dropdown-item" href="{{ route('customer.create')}}">{{__("Add New Customer")}} </a></li>
+                        <li><a class="dropdown-item" href="{{ route('customers')}}">{{__("Alle Kunden")}} </a></li>
+                        <li><a class="dropdown-item" href="{{ route('customer.create')}}">{{__("Neuen Kunden erstellen")}} </a></li>
                         </ul>
                     </div>
                     </div>

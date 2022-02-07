@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{ __('Du bist eingeloggt!') }}
 
                     <div class="row">                      
                         <div class="col-md-12">

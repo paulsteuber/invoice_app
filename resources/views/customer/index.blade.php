@@ -6,8 +6,8 @@
         <div class="container">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h1>{{ __('Your Customers') }}</h1>
-                    <a type="button" class="h3 btn btn-primary" href="{{ route('customer.create')}}">+ {{ __('Add New Customer') }}</a>
+                    <h1>{{ __('Alle Kunden') }}</h1>
+                    <a type="button" class="h3 btn btn-primary" href="{{ route('customer.create')}}">+ {{ __('Neuen Kunden erstellen') }}</a>
                 </div>
 
                 <div class="card-body row">
@@ -15,13 +15,13 @@
                    <table class="table table-striped">
                    <thead>
                         <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Mailadress</th>
-                            <th scope="col">Rate / Hour</th>
-                            <th scope="col">Open</th>
-                            <th scope="col">Paid</th>
-                            <th scope="col">Total</th>
-                            <th scope="col">Options</th>
+                            <th scope="col">{{ __('Name') }}</th>
+                            <th scope="col">{{ __('E-Mailadresse') }}</th>
+                            <th scope="col">{{ __('Stundensatz') }}</th>
+                            <th scope="col">{{ __('Offen') }}</th>
+                            <th scope="col">{{ __('Bezahlt') }}</th>
+                            <th scope="col">{{ __('Gesamt') }}</th>
+                            <th scope="col">{{ __('Aktionen') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,9 +30,9 @@
                             <th scope="row">{{$customer->name}}  @if($customer->alias_name)({{$customer->alias_name}})@endif</th>
                             <td><a href="mailto:{{$customer->mail}}">{{$customer->mail}}</a></td>
                             <td>{{$customer->rate_per_hour}}€</td>
-                            <td> N.A. €</td>
-                            <td>N.A. €</td>
-                            <td>N.A. €</td>
+                            <td>{{ __('N.A. €') }}</td>
+                            <td>{{ __('N.A. €') }}</td>
+                            <td>{{ __('N.A. €') }}</td>
                             <td class="options"><div class="btn-group" role="group" aria-label="{{_('Customer Options')}}">
                                 <a type="button" class="btn btn-primary" href="{{route('customer.edit', $customer->id)}}">Edit</a>
                                 </div></td>

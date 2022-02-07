@@ -6,7 +6,7 @@
         <div class="container">
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h1>{{ __('Create New Invoice') }}</h1>
+                    <h1>{{ __('Neue Rechnung erstellen') }}</h1>
                 </div>
 
                 <div class="card-body row">
@@ -80,7 +80,7 @@
                                         </div>
                                         <div class="form-group col-lg-6">
                                             <div class="row">
-                                                <label for="city" class="col-md-12 col-form-label">{{ __('City') }}</label>
+                                                <label for="city" class="col-md-12 col-form-label">{{ __('Stadt') }}</label>
                                                 <div class="col-md-12">
                                                     <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{$user->profile->city}}" required >
                                                     @error('city')
@@ -94,7 +94,7 @@
                                         
                                         <div class="form-group col-md-12">
                                             <div class="row">
-                                                <label for="mail" class="col-md-12 col-form-label">{{ __('Mail') }}</label>
+                                                <label for="mail" class="col-md-12 col-form-label">{{ __('E-Mailadresse') }}</label>
                                                 <div class="col-md-12">
                                                     <input id="mail" type="text" class="form-control @error('city') is-invalid @enderror" name="mail" value="{{$user->profile->mail}}" required >
                                                     @error('mail')
@@ -202,7 +202,7 @@
                             <div class="col-md-12">
                                 <div class="card invoice-card">
                                     <div class="card-header">
-                                        <h2 class="h5">{{__('Invoice Settings')}}</h2>
+                                        <h2 class="h5">{{__('Rechnungseinstellungen')}}</h2>
                                     </div>
                                     <div class="card-body row">
                                        <invoice-number-component next-invoice-number={{$nextInvoiceNumber}}></invoice-number-component> 
@@ -258,7 +258,6 @@
                                             <div class="col-lg-5">
                                             @error('invoice_partial_pay', 'invoice_partial_pay_date', 'invoice_partial_pay_sum', 'invoice_pay_date', 'invoice_state', 'invoice_additional')
                                                         <span class="invalid-feedback" role="alert">
-                                                        <h1>HUHU</h1>
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
