@@ -6,7 +6,7 @@
         <div class="container">
             <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                    <h1>{{ __('Your Invoices') }}</h1>
+                    <h1>{{ __('Alle Rechnungen') }}</h1>
                     <a type="button" class="h3 btn btn-primary" href="{{ route('invoice.create')}}">+ {{ __('Add New Invoice') }}</a>
                 </div>
                         
@@ -15,14 +15,14 @@
                    <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Datum</th>
-                            <th scope="col">Kunde</th>
-                            <th scope="col">Beschreibung</th>
-                            <th class="text-right" scope="col">Netto</th>
-                            <th class="text-right" scope="col">MwSt</th>
-                            <th class="text-right" scope="col">Brutto</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Aktionen</th>
+                            <th scope="col">{{ __('Datum') }}</th>
+                            <th scope="col">{{ __('Kunde') }}</th>
+                            <th scope="col">{{ __('Beschreibung') }}</th>
+                            <th class="text-right" scope="col">{{ __('Netto') }}</th>
+                            <th class="text-right" scope="col">{{ __('MwSt') }}</th>
+                            <th class="text-right" scope="col">{{ __('Brutto') }}</th>
+                            <th scope="col">{{ __('Status') }}</th>
+                            <th scope="col">{{ __('Aktionen') }}</th>
                         </tr>
                     </thead>
                     <tbody>

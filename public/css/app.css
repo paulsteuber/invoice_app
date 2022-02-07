@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Poppins:wght@100;200;300;500;700&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;500;700&display=swap);
 @charset "UTF-8";
 /*!
  * Bootstrap v4.6.0 (https://getbootstrap.com/)
@@ -10004,10 +10004,11 @@ h3 {
 }
 body {
   font-family: "Poppins";
+  font-weight: 300;
 }
 
 .card-header.h1, .card-header h1 {
-  font-weight: 300;
+  font-weight: 100;
   margin-bottom: 0;
 }
 .card-header h2, .card-header h3, .card-header h4, .card-header h5, .card-header h6, .card-header .h2, .card-header .h3, .card-header .h4, .card-header .h5, .card-header .h6 {
