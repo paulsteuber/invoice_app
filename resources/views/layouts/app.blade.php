@@ -62,7 +62,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('profile') }}">{{_('Geschäftsinformationen')}}</a>
+                                    <a class="dropdown-item" href="{{ route('profile') }}">{{__('Geschäftsinformationen')}}</a>
                                     <a class="dropdown-item logout" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
