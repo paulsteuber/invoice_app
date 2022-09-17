@@ -2,9 +2,33 @@ body{
     font-family: 'Poppins';
     font-weight: 300;
 }
-.card-header{
+.main-header{
+    .button-list{
+        gap: 20px;
+        .mh-btn{
+            text-decoration: none;
+            color: $gray-900;
+            background-color: $white;
+            height: 40px;
+            padding: 0 20px;
+            transition: all 0.15s ease;
+            border-radius: 0.25rem;
+            &.active{
+                pointer-events: none;
+                background-color: #f8fafc;
+            }
+            &:not(.active):hover{
+                box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.175) !important;
+            }
+        }
+    }
+    
+}
+.main-content{
+    .page-title{
+        font-weight: 700;
+    }
     &.h1, h1{
-        font-weight: 100;
         margin-bottom: 0;
     }
     h2,h3,h4,h5,h6, .h2,.h3,.h4,.h5,.h6{

@@ -3,7 +3,6 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-
 require('./bootstrap');
 
 var pdfMake = require('./pdfmake');
@@ -11,6 +10,7 @@ var pdfMake = require('./pdfmake');
 
 require('./invoice_pdf');
 require('./store_invoice');
+require('./customers');
 
 window.Vue = require('vue').default;
 
@@ -26,10 +26,17 @@ window.Vue = require('vue').default;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+//layouts
+Vue.component('customer-invoice-header-component', require('./components/layout/CustomerInvoiceHeaderComponent.vue').default);
+//invoices
 Vue.component('customer-component', require('./components/invoices/CustomerComponent.vue').default);
 Vue.component('invoice-number-component', require('./components/invoices/InvoiceNumberComponent.vue').default);
 Vue.component('invoice-position-component', require('./components/invoices/InvoicePositionComponent.vue').default);
 Vue.component('invoice-partial-pay-component', require('./components/invoices/PartialPayComponent.vue').default);
+Vue.component('invoice-list-element-component', require('./components/invoices/InvoiceListElementComponent.vue').default);
+//customers
+Vue.component('customer-overview-component', require('./components/customers/CustomerOverviewComponent.vue').default);
+
 
 
 /**

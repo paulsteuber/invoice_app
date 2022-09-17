@@ -1,0 +1,61 @@
+.customer{
+        margin-top: 1.25rem;
+}
+.customer-card{
+    &:hover{
+        .customer-card-footer {
+            > div{
+                transform: translateY(0px);
+            }
+        }
+    }
+    .card{
+        border: 0px;
+        z-index: 1;
+        transition: all 0.15s ease;
+        cursor: pointer;
+        &:hover{
+            box-shadow:0  0.125rem 0.25rem rgba(0, 0, 0, 0.175) !important;
+
+        }
+
+    }
+    .customer-card-header{
+        padding: 0.625rem 1.25rem 0.625rem 1.25rem;
+        .name{
+            font-weight: 500;
+            font-size: 0.8rem;
+        }
+        .alias_name{
+            font-size: 0.75rem;
+            .bi-person{
+                margin-right: 4px;
+            }
+        }
+    }
+    .card-body{
+        border-top: 1px solid $gray-100;
+        padding: 0.625rem 1.25rem 0.625rem 1.25rem;
+        font-size: 0.75rem;
+        line-height: 1.2;
+    }
+    .customer-card-footer {
+        padding: 8px 0;
+        > div{
+            cursor: pointer;
+            background-color: $white;
+            border-radius: 0.25rem;
+            transition: all 0.15s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: translateY(-100px);
+            &:hover{
+                box-shadow:0  0.125rem 0.25rem rgba(0, 0, 0, 0.175) !important
+            }
+        }
+        gap: 4px;
+    }
+}

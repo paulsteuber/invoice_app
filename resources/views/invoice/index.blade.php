@@ -4,60 +4,57 @@
 <div class="container-fluid ">
     <div class="row justify-content-center">
         <div class="container">
-            <div class="card">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                    <h1>{{ __('Alle Rechnungen') }}</h1>
-                    <a type="button" class="h3 btn btn-primary" href="{{ route('invoice.create')}}">+ {{ __('Add New Invoice') }}</a>
-                </div>
-                        
-                <div class="card-body row">
-                <table class="table table-striped">
+            <div class="main-content">
+                <customer-invoice-header-component header-title="{{__('Alle Rechnungen')}}" add-button="{{__('neue Rechnung')}}" add-button-url="{{ route('invoice.create')}}"></customer-invoice-header-component>
+                                       
+                <table class="invoice-table">
                    <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">{{ __('Datum') }}</th>
-                            <th scope="col">{{ __('Kunde') }}</th>
-                            <th scope="col">{{ __('Beschreibung') }}</th>
-                            <th class="text-right" scope="col">{{ __('Netto') }}</th>
-                            <th class="text-right" scope="col">{{ __('MwSt') }}</th>
-                            <th class="text-right" scope="col">{{ __('Brutto') }}</th>
-                            <th scope="col">{{ __('Status') }}</th>
-                            <th scope="col">{{ __('Aktionen') }}</th>
+                            <td scope="col">#</td>
+                            <td scope="col">{{ __('Datum') }}</td>
+                            <td scope="col">{{ __('Kunde') }}</td>
+                            <td scope="col">{{ __('Beschreibung') }}</td>
+                            <td class="text-right" scope="col">{{ __('Netto') }}</td>
+                            <td class="text-right" scope="col">{{ __('MwSt') }}</td>
+                            <td class="text-right" scope="col">{{ __('Brutto') }}</td>
+                            <td scope="col">{{ __('Status') }}</td>
+                            <td scope="col">{{ __('Aktionen') }}</td>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach(Auth::user()->invoices as $invoice)
-                        <tr>
+                        <invoice-list-element-component invoice="{{$invoice}}" mwst="{{$invoice->mwst_total}}" edit-route="{{route('invoice.edit', $invoice->id)}}"></invoice-list-element-component>
+                        <tr  class="shadow-sm">
                         
                             <td class="text-right">{{$invoice->invoice_number}}</td>
                             <td class="invoice_date">{{date("d.m.Y", strtotime($invoice->invoice_date))}}</td>
-                            <th scope="row">{{$customer::whereId($invoice->customer_id)->first()->name}}</th>
-                            <td> {{$invoice->invoice_description}}</td>
-                            <td class="text-right">{{number_format((float)$invoice->netto_total, 2, ',', '')}}€</td>
-                            <td class="text-right"> {{number_format(floatval($invoice->brutto_total) - floatval($invoice->netto_total), 2, ',', '')}}€</td>
-                            <th class="text-right" scope="row"> {{number_format((float)$invoice->brutto_total, 2, '.', '')}}€</th>
-                            <th class="text-right" scope="row"> {{$invoice->invoice_state}}</th>
+                            <td scope="row">{{Str::of($customer::whereId($invoice->customer_id)->first()->name)->limit(20)}}</td>
+                            <td>{{Str::of($invoice->invoice_description)->limit(30)}}</td>
+                            <td class="text-right netto">{{number_format((float)$invoice->netto_total, 2, ',', '')}} €</td>
+                            <td class="text-right mwst"> {{number_format(floatval($invoice->brutto_total) - floatval($invoice->netto_total), 2, ',', '')}} €</td>
+                            <td class="text-right brutto" scope="row"> {{number_format((float)$invoice->brutto_total, 2, ',', '')}} €</td>
+                            <td class="text-right" scope="row"> {{$invoice->invoice_state}}</td>
                             <td>
                                 <a type="button" class="pdfDownload">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M14 2v11h2.51l-4.51 5.01-4.51-5.01h2.51v-11h4zm2-2h-8v11h-5l9 10 9-10h-5v-11zm3 19v3h-14v-3h-2v5h18v-5h-2z"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                                </svg>
                                 </a>
                                  <input type="hidden" class="hidden_invoice_data" value="{{$invoice}}">
 
                                 <a type="button" class="edit_invoice ml-2" href="{{route('invoice.edit', $invoice->id)}}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M18.363 8.464l1.433 1.431-12.67 12.669-7.125 1.436 1.439-7.127 12.665-12.668 1.431 1.431-12.255 12.224-.726 3.584 3.584-.723 12.224-12.257zm-.056-8.464l-2.815 2.817 5.691 5.692 2.817-2.821-5.693-5.688zm-12.318 18.718l11.313-11.316-.705-.707-11.313 11.314.705.709z"/></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                                    <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+                                    </svg>
                                 </a>  
-                                <a type="button" class="edit_invoice ml-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12.015 7c4.751 0 8.063 3.012 9.504 4.636-1.401 1.837-4.713 5.364-9.504 5.364-4.42 0-7.93-3.536-9.478-5.407 1.493-1.647 4.817-4.593 9.478-4.593zm0-2c-7.569 0-12.015 6.551-12.015 6.551s4.835 7.449 12.015 7.449c7.733 0 11.985-7.449 11.985-7.449s-4.291-6.551-11.985-6.551zm-.015 3c-2.21 0-4 1.791-4 4s1.79 4 4 4c2.209 0 4-1.791 4-4s-1.791-4-4-4zm-.004 3.999c-.564.564-1.479.564-2.044 0s-.565-1.48 0-2.044c.564-.564 1.479-.564 2.044 0s.565 1.479 0 2.044z"/></svg>
-                                </a>
                             </td>
                         </tr>
-                        </div>
                         @endforeach
                     </tbody>
-                    </table>
+                </table>
             </div>
         </div>
-
     </div>
 </div>
 @endsection

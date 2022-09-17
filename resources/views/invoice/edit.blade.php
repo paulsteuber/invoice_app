@@ -26,7 +26,7 @@
                                     <h5>{{__('Kundeninformationen')}}</h5>
                                 </div>
                                 <div class="card-body row">
-                                <customer-component old-invoice-id={{$invoice->id}}></customer-component>
+                                <customer-component old-invoice-id="{{$invoice->id}}"></customer-component>
                                 </div>
                             </div>
                         </div>

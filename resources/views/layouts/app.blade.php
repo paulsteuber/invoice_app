@@ -81,37 +81,20 @@
         </nav>
         @if(Auth::user())
         <nav class="pt-3">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="container">
-                
-                    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                    <a type="button" class="btn btn-secondary" href="{{route('home')}}">{{__("Dashboard")}}</a>
-                    <div class="btn-group" role="group">
-                        <a id="btnGroupInvoices" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        {{__("Rechnungen")}}
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="btnGroupInvoices">
-                        <li><a class="dropdown-item" href="{{ route('invoice.index')}}">{{__("Alle Rechnungen")}} </a></li>
-                        <li><a class="dropdown-item" href="{{ route('invoice.create')}}">{{__("Neue Rechnung erstellen")}} </a></li>
-                        </ul>
-                    </div>
-                    <div class="btn-group" role="group">
-                        <a id="btnGroupCustomers" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        {{__("Kunden")}}
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="btnGroupCustomers">
-                        <li><a class="dropdown-item" href="{{ route('customers')}}">{{__("Alle Kunden")}} </a></li>
-                        <li><a class="dropdown-item" href="{{ route('customer.create')}}">{{__("Neuen Kunden erstellen")}} </a></li>
-                        </ul>
-                    </div>
-                    </div>
-                
-                </div>            
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="container">
+
+                        <div class="main-header">
+                            <div class="button-list d-flex justify-content-center">
+                                <a class="mh-btn shadow-sm d-flex align-items-center {{request()->routeIs('home')? 'active': ''}}" href="{{route('home')}}">{{__("Dashboard")}}</a>
+                                <a class="mh-btn shadow-sm d-flex align-items-center {{request()->routeIs('invoice.index')? 'active': ''}}" href="{{ route('invoice.index')}}">{{__("Rechnungen")}}</a>
+                                <a class="mh-btn shadow-sm d-flex align-items-center {{request()->routeIs('customers')? 'active': ''}}" href="{{ route('customers')}}">{{__("Kunden")}}</a>
+                            </div>
+                        </div>
+                    </div>            
+                </div>
             </div>
-        
-        </div>
-        
         </nav>
         @endif
         <main class="py-3">

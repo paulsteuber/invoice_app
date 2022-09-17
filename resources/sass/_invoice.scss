@@ -1,3 +1,35 @@
+.invoice-table{
+    margin-top: 1.25rem;
+    width: 100%;
+    td{
+        padding: 5px 10px;
+    }
+    tbody{
+        tr{
+            background-color: $white;
+            border-radius: 0.25rem;
+            transition: all 0.15s ease;
+            margin: 5px 0;
+            &:hover{
+                box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.175) !important;
+            }
+            td{
+                font-weight: 500;
+                font-size: 0.8rem;
+            }
+            .netto{
+                color: $gray-900;
+            }
+            .brutto{
+                color: #51916c;
+            }
+            .mwst{
+                
+            }
+        }
+    }
+}
+
 .invoice-create{
     #customer-results{
         & > div{

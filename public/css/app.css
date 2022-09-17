@@ -10007,14 +10007,62 @@ body {
   font-weight: 300;
 }
 
-.card-header.h1, .card-header h1 {
-  font-weight: 100;
+.main-header .button-list {
+  gap: 20px;
+}
+.main-header .button-list .mh-btn {
+  text-decoration: none;
+  color: #212529;
+  background-color: #fff;
+  height: 40px;
+  padding: 0 20px;
+  transition: all 0.15s ease;
+  border-radius: 0.25rem;
+}
+.main-header .button-list .mh-btn.active {
+  pointer-events: none;
+  background-color: #f8fafc;
+}
+.main-header .button-list .mh-btn:not(.active):hover {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.175) !important;
+}
+
+.main-content .page-title {
+  font-weight: 700;
+}
+.main-content.h1, .main-content h1 {
   margin-bottom: 0;
 }
-.card-header h2, .card-header h3, .card-header h4, .card-header h5, .card-header h6, .card-header .h2, .card-header .h3, .card-header .h4, .card-header .h5, .card-header .h6 {
+.main-content h2, .main-content h3, .main-content h4, .main-content h5, .main-content h6, .main-content .h2, .main-content .h3, .main-content .h4, .main-content .h5, .main-content .h6 {
   margin-bottom: 0;
 }
 
+.invoice-table {
+  margin-top: 1.25rem;
+  width: 100%;
+}
+.invoice-table td {
+  padding: 5px 10px;
+}
+.invoice-table tbody tr {
+  background-color: #fff;
+  border-radius: 0.25rem;
+  transition: all 0.15s ease;
+  margin: 5px 0;
+}
+.invoice-table tbody tr:hover {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.175) !important;
+}
+.invoice-table tbody tr td {
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+.invoice-table tbody tr .netto {
+  color: #212529;
+}
+.invoice-table tbody tr .brutto {
+  color: #51916c;
+}
 .invoice-create #customer-results > div {
   position: relative;
 }
@@ -10082,4 +10130,59 @@ body {
 }
 .invoice-create .additional-information .invoice_additional {
   width: 100%;
+}
+
+.customer {
+  margin-top: 1.25rem;
+}
+
+.customer-card:hover .customer-card-footer > div {
+  transform: translateY(0px);
+}
+.customer-card .card {
+  border: 0px;
+  z-index: 1;
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+.customer-card .card:hover {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.175) !important;
+}
+.customer-card .customer-card-header {
+  padding: 0.625rem 1.25rem 0.625rem 1.25rem;
+}
+.customer-card .customer-card-header .name {
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+.customer-card .customer-card-header .alias_name {
+  font-size: 0.75rem;
+}
+.customer-card .customer-card-header .alias_name .bi-person {
+  margin-right: 4px;
+}
+.customer-card .card-body {
+  border-top: 1px solid #f8f9fa;
+  padding: 0.625rem 1.25rem 0.625rem 1.25rem;
+  font-size: 0.75rem;
+  line-height: 1.2;
+}
+.customer-card .customer-card-footer {
+  padding: 8px 0;
+  gap: 4px;
+}
+.customer-card .customer-card-footer > div {
+  cursor: pointer;
+  background-color: #fff;
+  border-radius: 0.25rem;
+  transition: all 0.15s ease;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-100px);
+}
+.customer-card .customer-card-footer > div:hover {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.175) !important;
 }
