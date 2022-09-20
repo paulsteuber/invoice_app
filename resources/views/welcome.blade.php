@@ -48,10 +48,10 @@
                     <div class="col-md-6 d-flex flex-column justify-content-center">
                         <h1 class="seo-title">{{__("Online Rechnungssoftware")}}</h1>
                         <p class="section-title h2">
-                            Für Selbstständige und Kleinunternehmer!
+                            Die schlanke Lösung für Selbstständige!
                         </p>
-                        <p class="pr-4">Bei <span class="mini-site-title">chia</span> kannst Du Rechnungen erstellen, verändern und als PDF downloaden.
-                        Genieße den vollen Umfang unseres Services und das sogar <b>100% kostenfrei!</b> </p>
+                        <p class="pr-4">Bei <span class="mini-site-title">chia</span> können Freiberufler, Selbstständige und Kleinunternehmer ihre Kunden verwalten und Rechnungen erstellen.
+                        Unser Service steht dir <b>dauerhaft kostenlos</b> zur Verfügung!</p>
                         <div class="cta-buttons">
                         @if (Route::has('login'))
                                 @auth
@@ -101,8 +101,7 @@
                         <p class="section-title h2">
                             Erstelle Kundenprofile schnell und unkompliziert!
                         </p>
-                        <p class="pr-4">Bei <span class="mini-site-title">chia</span> kannst Du Kundenprofile speichern, Rechnungen erstellen, verändern und als PDF downloaden.
-                        Genieße den vollen Umfang unseres Services und das sogar <b>100% kostenfrei!</b> </p>
+                        <p class="pr-4">Bei <span class="mini-site-title">chia</span> kannst Du Kundenprofile anlegen und somit noch schneller Rechnungen für deine Kunden erstellen. Über die integrierte Suchfunktion kannst du die Kundendaten mit einem Klick in deine Rechnungen übernehmen.</p>
                         <div class="cta-buttons">
                         @if (Route::has('login'))
                                 @auth

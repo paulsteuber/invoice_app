@@ -52,20 +52,6 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group row">
-                                            <label for="city" class="col-md-12 col-form-label">{{ __('Stadt') }}</label>
-                                            <div class="col-md-12">
-                                                <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" autocomplete="city" autofocus required>
-
-                                                @error('city')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                    </div>
-                                </div>
                                 <div class="col-md-6">       
                                     <div class="form-group row">
                                         <label for="zip" class="col-md-12 col-form-label">{{ __('PLZ') }}</label>
@@ -78,6 +64,20 @@
                                                 </span>
                                             @enderror
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                            <label for="city" class="col-md-12 col-form-label">{{ __('Stadt') }}</label>
+                                            <div class="col-md-12">
+                                                <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" autocomplete="city" autofocus required>
+
+                                                @error('city')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
                                     </div>
                                 </div>
                             </div>
@@ -127,32 +127,17 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="tax_id" class="col-md-12 col-form-label">{{ __('Steuernumer') }}</label>
+                            <label for="phone" class="col-md-12 col-form-label">{{ __('Telefonnummer') }}</label>
                             <div class="col-md-12">
-                                <input id="tax_id" type="text" class="form-control @error('tax_id') is-invalid @enderror" name="tax_id" value="{{ old('tax_id') }}" autocomplete="tax_id" autofocus>
+                                <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" autocomplete="phone" autofocus>
 
-                                @error('tax_id')
+                                @error('phone')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="rate_per_hour" class="col-md-12 col-form-label">{{ __('Stundensatz') }}</label>
-                            <div class="col-md-12">
-                                <input id="rate_per_hour" type="text" class="form-control @error('rate_per_hour') is-invalid @enderror" name="rate_per_hour" value="{{ old('rate_per_hour') }}" autocomplete="rate_per_hour" autofocus>
-
-                                @error('rate_per_hour')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                           
+                        </div>                          
                             
                         </div>
                         <div class="col-md-12">

@@ -31,7 +31,7 @@
 }
 .invoice-list{
     .row{
-        gap: 20px;
+        gap: 30px;
     }
 }
 .invoice-list-element{
@@ -39,6 +39,7 @@
     padding: 20px;
     transition: all 0.15s ease;
     border-radius: 0.25rem;
+    &:hover{box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.175) !important;}
     .number{
         margin: 0.25rem 0;
     }

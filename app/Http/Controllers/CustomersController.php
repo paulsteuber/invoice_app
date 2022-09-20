@@ -42,8 +42,7 @@ class CustomersController extends Controller
         'country'=> 'required',
         'mail'=> 'required',
         'website'=> '',
-        'tax_id'=> '',
-        'rate_per_hour'=> ''
+        'phone'=> '',
        ]);
        auth()->user()->customers()->create($data);
        return redirect('/customers');
@@ -59,8 +58,7 @@ class CustomersController extends Controller
         'country'=> 'required',
         'mail'=> 'required',
         'website'=> '',
-        'tax_id'=> '',
-        'rate_per_hour'=> ''
+        'phone'=> '',
        ]);
        
        $customer = Customer::find($customer_id);

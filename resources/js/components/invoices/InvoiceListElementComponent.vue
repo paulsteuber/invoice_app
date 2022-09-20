@@ -97,7 +97,14 @@
             this.invoiceData.invoice_date = this.dateToString(this.ymdToDate(this.invoiceData.invoice_date));
             this.invoiceData.customer_name = this.invoiceData.customer_name.length > 25 ? this.invoiceData.customer_name.substring(0, 23)+"...": this.invoiceData.customer_name;
             this.invoiceData.invoice_description = this.invoiceData.invoice_description.length > 25 ? this.invoiceData.invoice_description.substring(0, 23)+"...": this.invoiceData.invoice_description;
-            this.invoiceData.mwst_total = this.moneyToString(JSON.parse(this.mwst.slice(1, -1)).value);
+            let mwstArray = this.mwst.slice(1, -1).split(",");
+            for(const mwst of mwstArray){
+                let val = parseFloat(JSON.parse(mwst).value);
+                console.log(val)
+            }
+            
+            console.log(mwsttotal);
+           
             this.invoiceData.netto_total = this.moneyToString(this.invoiceData.netto_total);
             this.invoiceData.brutto_total = this.moneyToString(this.invoiceData.brutto_total);
         },

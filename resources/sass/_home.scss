@@ -1,0 +1,23 @@
+.dashboard-page{
+    .sales-overview{
+        .shadow-sm{
+            border-radius: 0.25rem;
+        }
+        hr{
+            margin-left: 0;
+        }
+        span{
+            font-size: 0.75rem;
+        }
+        .brutto{
+            .sum{
+                color: $orange;
+            }
+        }
+        .netto{
+            .sum{
+                color: $green;
+            }
+        }
+    }
+}
