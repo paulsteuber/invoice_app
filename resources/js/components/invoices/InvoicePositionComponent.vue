@@ -12,6 +12,21 @@
                 </tr>
             </thead>
             <tbody>
+
+                <!-- 
+                    
+
+
+
+
+                --> 
+                <!-- 
+                    
+
+
+
+
+                --> 
                 <tr v-model="positions" v-for="(invoice_pos, index) in positions" :class="'invoice_position_'+index+1">
                     <th scope="row">{{index+1}}
                         <a type="button" class="remove-pos ml-4" @click="deletePosition(index)">
@@ -179,9 +194,9 @@ export default {
                         mwstArray.forEach(mwstElem => {
                             if(mwstElem.percent == element.mwst){
                                 if(!parseFloat(mwstElem.value)){
-                                    mwstElem.value = this.round2(0 + parseFloat(element.mwst_sum));
+                                    mwstElem.value = ""+this.round2(0 + parseFloat(element.mwst_sum));
                                 } else{
-                                    mwstElem.value = this.round2(parseFloat(mwstElem.value) + parseFloat(element.mwst_sum));
+                                    mwstElem.value = ""+this.round2(parseFloat(mwstElem.value) + parseFloat(element.mwst_sum));
                                 }
                                 mwst_is_set = true;
                             }
@@ -189,8 +204,8 @@ export default {
                     }
                     if (!mwst_is_set){
                         mwstArray.push({
-                            'percent': element.mwst,
-                            'value': this.round2(parseFloat(element.mwst_sum))
+                            "percent": ""+element.mwst,
+                            "value": ""+this.round2(parseFloat(element.mwst_sum))
                         });
                     }
 

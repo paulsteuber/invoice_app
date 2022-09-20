@@ -36,6 +36,8 @@ Vue.component('invoice-partial-pay-component', require('./components/invoices/Pa
 Vue.component('invoice-list-element-component', require('./components/invoices/InvoiceListElementComponent.vue').default);
 //customers
 Vue.component('customer-overview-component', require('./components/customers/CustomerOverviewComponent.vue').default);
+Vue.component('invoice-parent-position-component', require('./components/invoices/InvoiceParentPositionComponent.vue').default);
+Vue.component('invoice-single-position-component', require('./components/invoices/InvoiceSinglePositionComponent.vue').default);
 
 
 

@@ -249,7 +249,8 @@
                                         <h2 class="h5">{{__('Rechnungspositionen')}}</h2>
                                     </div>
                                     <div class="card-body row">
-                                      <invoice-position-component old-positions="{{$invoice->all_positions}}"></invoice-position-component>
+                                        <invoice-parent-position-component></invoice-parent-position-component>
+                                      <!--<invoice-position-component old-positions="{{$invoice->all_positions}}"></invoice-position-component> -->
                                     </div>
                                 </div>
                             </div>

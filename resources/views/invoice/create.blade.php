@@ -247,6 +247,8 @@
                                         <h2 class="h5">{{__('Rechnungspositionen')}}</h2>
                                     </div>
                                     <div class="card-body row">
+                                        
+                                        <invoice-parent-position-component></invoice-parent-position-component>
                                       <invoice-position-component></invoice-position-component>
                                     </div>
                                 </div>
