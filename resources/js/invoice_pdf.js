@@ -25,11 +25,12 @@ jQuery(function($){
     }
 
     $(".pdfDownload").on("click", function(){
-        var row = $(this).parents("tr");
-        var data = JSON.parse(row.find(".hidden_invoice_data").val());
+        var actionRow = $(this).parents(".actions");
+        console.log("pdf", actionRow.find(".hidden_invoice_data").val().toString());
+        var data = JSON.parse(actionRow.find(".hidden_invoice_data").val());
 
         var shortCustomerName = data.customer_name.length > 26 ? data.customer_name.split(" ")[0]:data.customer_name;
-        var invoiceDate = $(row).find(".invoice_date").text();
+        var invoiceDate = $(actionRow).find(".invoice_date").text();
         
         console.log(data.positions);
         var positions_json = JSON.parse(data.all_positions);

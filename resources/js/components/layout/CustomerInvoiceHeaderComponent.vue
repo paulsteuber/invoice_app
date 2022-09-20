@@ -24,3 +24,8 @@
         }
     }
 </script>
+<style>
+    .main-content-header{
+        margin-bottom: 1.25rem;
+    }
+</style>

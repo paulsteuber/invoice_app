@@ -18,18 +18,24 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Righteous&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-header navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/dashboard') }}">
-                    {{ config('app.name', 'Laravel') }}
+                @guest
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    <p class="h1 site-title">{{ config('app.name', 'Laravel') }}</p>
                 </a>
+                @else
+                <a class="navbar-brand" href="{{ url('/dashboard') }}">
+                    <p class="h1 site-title">{{ config('app.name', 'Laravel') }}</p>
+                </a>
+                @endguest
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -101,8 +107,6 @@
             @yield('content')
         </main>
     </div>
-    <footer>
-        
-    </footer>
+    @include('layouts/footer')
 </body>
 </html>

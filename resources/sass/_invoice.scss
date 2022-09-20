@@ -29,6 +29,32 @@
         }
     }
 }
+.invoice-list{
+    .row{
+        gap: 20px;
+    }
+}
+.invoice-list-element{
+    background-color: $white;
+    padding: 20px;
+    transition: all 0.15s ease;
+    border-radius: 0.25rem;
+    .number{
+        margin: 0.25rem 0;
+    }
+    .date{
+        font-size: 0.8rem;
+        svg{
+            margin-right: 4px;
+        }
+    }
+    .financial{
+        margin: 1.25rem 0;
+        span{
+            font-size: 0.6rem; 
+        }
+    }
+}
 
 .invoice-create{
     #customer-results{

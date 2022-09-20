@@ -1,0 +1,21 @@
+.welcome-page{
+    
+    .mini-site-title{
+        font-family: "Righteous";
+        color: $orange;
+    }
+    .main-section{
+        margin: 2.5rem 0 4rem 0;
+    }
+    .seo-title{
+        color: $orange;
+        font-size: 1rem;
+    }
+    section{
+        margin: 4rem 0;
+        img{
+            max-width: 100%;
+        }
+    }
+
+}
