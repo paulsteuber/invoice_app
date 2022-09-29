@@ -11,8 +11,8 @@
                 <th scope="col" class="text-right">Netto Total</th>
                 </tr>
             </thead>
-            <tbody>
-                <invoice-single-position-component @posData="posData"></invoice-single-position-component>
+            <tbody v-for="(position, index) in positions">
+                    <invoice-single-position-component @posData="posData" :data="position" :id="index"></invoice-single-position-component>
             </tbody>
         </table>
         <div class="d-flex justify-content-center">
@@ -26,9 +26,13 @@
         
         data() {
             return {
-                positions: {
-                    
-                }
+                defaultPosition:{
+                    description: "Test",
+                    quantity: 1,
+                    netto: 0,
+                    mwst: 19,
+                },
+                positions: []
             }
         },
         methods:{
@@ -36,11 +40,12 @@
                
             },
             addPosition: function(){
-
+                this.positions.push(this.defaultPosition);
             }
         },
         mounted() {
-            console.log('Component mounted.')
+            this.positions.push(this.defaultPosition);
+            console.table(this.positions.first);
         }
     }
 </script>

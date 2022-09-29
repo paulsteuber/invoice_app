@@ -23,6 +23,7 @@
     export default {
         name: "InvoiceSinglePositionComponent",
         props:[
+            "data",
             "id"
         ],
         data(){
@@ -58,7 +59,6 @@
         },
         methods:{
             countUp: function(up){
-                alert(toFloat("5,5"));
                 if(!up){
                     if(this.posData.quantity > 1) this.posData.quantity--;
                 }
@@ -67,7 +67,7 @@
                 }
             },
             validateToNumber: function(){
-                this.posData.netto = isNaN(this.posData.netto) ? 0 : this.posData.netto;
+                this.posData.netto = isNaN(this.toFloat(this.posData.netto)) ? 0 : this.posData.netto;
                 this.posData.mwst_rate = isNaN(this.posData.mwst_rate) ? 19 : this.posData.mwst_rate;
             },
             validateMwst: function(){
@@ -99,7 +99,11 @@
         },
 
         mounted() {
-           // this.$emit('name', "Raja Tamil");
+           this.posData.id = this.id;
+           this.posData.description = this.data.description;
+           this.posData.quantity = this.data.quantity;
+           this.posData.netto = this.data.netto;
+           this.posData.mwst_rate = this.data.mwst;
         }
 
     }

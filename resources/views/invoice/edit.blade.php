@@ -265,7 +265,7 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
-                                                <invoice-partial-pay-component old-invoice="{{$invoice}}"></invoice-partial-pay-component>
+                                                <!-- <invoice-partial-pay-component old-invoice="{{$invoice}}"></invoice-partial-pay-component> -->
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <label for="invoice_pay_date" class="col-form-label">{{ __('Gesamt Zahlungsziel') }}</label>

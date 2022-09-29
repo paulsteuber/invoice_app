@@ -249,7 +249,7 @@
                                     <div class="card-body row">
                                         
                                         <invoice-parent-position-component></invoice-parent-position-component>
-                                      <invoice-position-component></invoice-position-component>
+                                      <!-- <invoice-position-component></invoice-position-component> -->
                                     </div>
                                 </div>
                             </div>
@@ -263,7 +263,7 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
-                                                <invoice-partial-pay-component></invoice-partial-pay-component>
+                                                <!-- <invoice-partial-pay-component></invoice-partial-pay-component> -->
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <label for="invoice_pay_date" class="col-form-label">{{ __('Gesamt Zahlungsziel') }}</label>

@@ -1,4 +1,5 @@
-<template>
+
+    <template>
     <div class="col-lg-12">
         <table class="table">
             <thead>
@@ -13,20 +14,6 @@
             </thead>
             <tbody>
 
-                <!-- 
-                    
-
-
-
-
-                --> 
-                <!-- 
-                    
-
-
-
-
-                --> 
                 <tr v-model="positions" v-for="(invoice_pos, index) in positions" :class="'invoice_position_'+index+1">
                     <th scope="row">{{index+1}}
                         <a type="button" class="remove-pos ml-4" @click="deletePosition(index)">

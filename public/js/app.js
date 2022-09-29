@@ -2355,15 +2355,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      positions: {}
+      defaultPosition: {
+        description: "Test",
+        quantity: 1,
+        netto: 0,
+        mwst: 19
+      },
+      positions: []
     };
   },
   methods: {
     posData: function posData(val) {},
-    addPosition: function addPosition() {}
+    addPosition: function addPosition() {
+      this.positions.push(this.defaultPosition);
+    }
   },
   mounted: function mounted() {
-    console.log('Component mounted.');
+    this.positions.push(this.defaultPosition);
+    console.table(this.positions.first);
   }
 });
 
@@ -2380,19 +2389,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2647,7 +2643,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "InvoiceSinglePositionComponent",
-  props: ["id"],
+  props: ["data", "id"],
   data: function data() {
     return {
       posData: {
@@ -2675,8 +2671,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     countUp: function countUp(up) {
-      alert(toFloat("5,5"));
-
       if (!up) {
         if (this.posData.quantity > 1) this.posData.quantity--;
       }
@@ -2686,7 +2680,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     validateToNumber: function validateToNumber() {
-      this.posData.netto = isNaN(this.posData.netto) ? 0 : this.posData.netto;
+      this.posData.netto = isNaN(this.toFloat(this.posData.netto)) ? 0 : this.posData.netto;
       this.posData.mwst_rate = isNaN(this.posData.mwst_rate) ? 19 : this.posData.mwst_rate;
     },
     validateMwst: function validateMwst() {
@@ -2714,7 +2708,12 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
-  mounted: function mounted() {// this.$emit('name', "Raja Tamil");
+  mounted: function mounted() {
+    this.posData.id = this.id;
+    this.posData.description = this.data.description;
+    this.posData.quantity = this.data.quantity;
+    this.posData.netto = this.data.netto;
+    this.posData.mwst_rate = this.data.mwst;
   }
 });
 
@@ -2731,6 +2730,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
 //
 //
 //
@@ -41125,19 +41125,27 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "new col-sm-12" }, [
-    _c("table", { staticClass: "table" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "tbody",
-        [
-          _c("invoice-single-position-component", {
-            on: { posData: _vm.posData }
-          })
-        ],
-        1
-      )
-    ]),
+    _c(
+      "table",
+      { staticClass: "table" },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm._l(_vm.positions, function(position, index) {
+          return _c(
+            "tbody",
+            [
+              _c("invoice-single-position-component", {
+                attrs: { data: position, id: index },
+                on: { posData: _vm.posData }
+              })
+            ],
+            1
+          )
+        })
+      ],
+      2
+    ),
     _vm._v(" "),
     _c("div", { staticClass: "d-flex justify-content-center" }, [
       _c(
