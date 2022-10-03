@@ -2356,23 +2356,46 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       defaultPosition: {
-        description: "Test",
+        id: 0,
+        description: "TEST",
         quantity: 1,
         netto: 0,
-        mwst: 19
+        mwst_rate: 19,
+        brutto_total: 0,
+        netto_total: 0,
+        mwst_total: 0
       },
       positions: []
     };
   },
   methods: {
-    posData: function posData(val) {},
+    posData: function posData(updatedPosition) {
+      this.positions[updatedPosition.id] = updatedPosition;
+    },
     addPosition: function addPosition() {
       this.positions.push(this.defaultPosition);
+      var arr = [{
+        id: "A"
+      }, {
+        id: "B"
+      }, {
+        id: "C"
+      }];
+      arr.splice(1, 1);
+      console.log("ARR", arr);
+    },
+    removePosition: function removePosition(id) {
+      console.log("ID", id);
+      console.log("BEFORE", this.positions);
+      console.log("BEFORE POS DESC", this.positions[id].description);
+      this.positions.splice(id, 1);
+      console.log("final", this.positions);
     }
   },
   mounted: function mounted() {
-    this.positions.push(this.defaultPosition);
-    console.table(this.positions.first);
+    var newDefaultPosition = this.defaultPosition;
+    newDefaultPosition.id = this.positions.length;
+    this.positions.push(newDefaultPosition);
   }
 });
 
@@ -2641,9 +2664,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "InvoiceSinglePositionComponent",
-  props: ["data", "id"],
+  props: ["inputData", "id"],
   data: function data() {
     return {
       posData: {
@@ -2671,12 +2698,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     countUp: function countUp(up) {
-      if (!up) {
-        if (this.posData.quantity > 1) this.posData.quantity--;
-      }
-
       if (up) {
         this.posData.quantity++;
+      } else {
+        if (this.posData.quantity > 1) this.posData.quantity--;
       }
     },
     validateToNumber: function validateToNumber() {
@@ -2706,14 +2731,21 @@ __webpack_require__.r(__webpack_exports__);
       if (val !== undefined) {
         return parseFloat(String(val).replace(/,/, '.'));
       }
+    },
+    removePos: function removePos() {
+      this.$parent.removePosition(this.id);
     }
   },
+  updated: function updated() {
+    alert("UPDATED");
+  },
   mounted: function mounted() {
+    alert("MOUNTED");
     this.posData.id = this.id;
-    this.posData.description = this.data.description;
-    this.posData.quantity = this.data.quantity;
-    this.posData.netto = this.data.netto;
-    this.posData.mwst_rate = this.data.mwst;
+    this.posData.description = this.inputData.description;
+    this.posData.quantity = this.inputData.quantity;
+    this.posData.netto = this.inputData.netto;
+    this.posData.mwst_rate = this.inputData.mwst_rate;
   }
 });
 
@@ -41136,7 +41168,7 @@ var render = function() {
             "tbody",
             [
               _c("invoice-single-position-component", {
-                attrs: { data: position, id: index },
+                attrs: { inputData: position, id: index },
                 on: { posData: _vm.posData }
               })
             ],
@@ -41612,7 +41644,9 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("tr", [
-    _c("th", { attrs: { scope: "row" } }),
+    _c("th", { attrs: { scope: "row" } }, [
+      _vm._v("\n       " + _vm._s(_vm.id) + "\n    ")
+    ]),
     _vm._v(" "),
     _c("td", { staticClass: "add_description" }, [
       _c("input", {
@@ -41667,6 +41701,41 @@ var render = function() {
           }
         },
         [_vm._v("-")]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "position_remove btn btn-outline-primary",
+          on: {
+            click: function($event) {
+              return _vm.removePos()
+            }
+          }
+        },
+        [
+          _c(
+            "svg",
+            {
+              staticClass: "bi bi-trash3",
+              attrs: {
+                xmlns: "http://www.w3.org/2000/svg",
+                width: "16",
+                height: "16",
+                fill: "currentColor",
+                viewBox: "0 0 16 16"
+              }
+            },
+            [
+              _c("path", {
+                attrs: {
+                  d:
+                    "M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"
+                }
+              })
+            ]
+          )
+        ]
       ),
       _vm._v(" "),
       _c("input", {

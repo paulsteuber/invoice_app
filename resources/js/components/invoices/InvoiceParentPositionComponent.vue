@@ -12,7 +12,7 @@
                 </tr>
             </thead>
             <tbody v-for="(position, index) in positions">
-                    <invoice-single-position-component @posData="posData" :data="position" :id="index"></invoice-single-position-component>
+                    <invoice-single-position-component @posData="posData" :inputData="position" :id="index"></invoice-single-position-component>
             </tbody>
         </table>
         <div class="d-flex justify-content-center">
@@ -26,26 +26,42 @@
         
         data() {
             return {
-                defaultPosition:{
-                    description: "Test",
+                defaultPosition: {
+                    id: 0,
+                    description: "TEST",
                     quantity: 1,
                     netto: 0,
-                    mwst: 19,
+                    mwst_rate: 19,
+                    brutto_total: 0,
+                    netto_total: 0,
+                    mwst_total: 0,
                 },
-                positions: []
+                positions: [],
+                
             }
         },
         methods:{
-            posData: function(val){
-               
+            posData: function(updatedPosition){
+               this.positions[updatedPosition.id] = updatedPosition;
             },
             addPosition: function(){
                 this.positions.push(this.defaultPosition);
+                let arr = [{id:"A"},{id:"B"},{id:"C"}];
+                arr.splice(1, 1)
+                console.log("ARR", arr);
+            },
+            removePosition(id){
+                console.log("ID", id);
+                console.log("BEFORE", this.positions)
+                console.log("BEFORE POS DESC", this.positions[id].description)
+                this.positions.splice(id, 1)
+                console.log("final",this.positions);
             }
         },
         mounted() {
-            this.positions.push(this.defaultPosition);
-            console.table(this.positions.first);
+            let newDefaultPosition = this.defaultPosition;
+            newDefaultPosition.id = this.positions.length;
+           this.positions.push(newDefaultPosition);
         }
     }
 </script>
