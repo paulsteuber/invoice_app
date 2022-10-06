@@ -10,19 +10,27 @@
     "production": "mix --production"
   },
   "devDependencies": {
+    "@vue/compiler-sfc": "^3.2.40",
     "axios": "^0.21",
     "bootstrap": "^4.0.0",
+    "css-loader": "^6.7.1",
+    "file-loader": "^6.2.0",
     "jquery": "^3.2",
     "laravel-mix": "^6.0.6",
     "lodash": "^4.17.19",
+    "mini-css-extract-plugin": "^2.6.1",
     "popper.js": "^1.12",
     "postcss": "^8.1.14",
     "resolve-url-loader": "^3.1.2",
     "sass": "^1.20.1",
     "sass-loader": "^8.0.0",
-    "vue": "^2.5.17",
-    "vue-loader": "^15.9.5",
-    "vue-template-compiler": "^2.6.10"
+    "url-loader": "^4.1.1",
+    "vue": "^3.2.36",
+    "vue-loader": "^17.0.0",
+    "vue-template-compiler": "^2.6.10",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.11.1"
   },
   "name": "invoice_app",
   "description": "<p align=\"center\"><a href=\"https://laravel.com\" target=\"_blank\"><img src=\"https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg\" width=\"400\"></a></p>",
@@ -40,5 +48,8 @@
   "bugs": {
     "url": "https://github.com/paulsteuber/invoice_app/issues"
   },
-  "homepage": "https://github.com/paulsteuber/invoice_app#readme"
+  "homepage": "https://github.com/paulsteuber/invoice_app#readme",
+  "dependencies": {
+    "vuex": "^4.0.2"
+  }
 }
