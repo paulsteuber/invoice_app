@@ -50,6 +50,7 @@
   },
   "homepage": "https://github.com/paulsteuber/invoice_app#readme",
   "dependencies": {
+    "autoprefixer": "^10.4.5",
     "vuex": "^4.0.2"
   }
 }

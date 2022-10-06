@@ -1,10 +1,10 @@
 <template>
-    <div class="new col-sm-12">
+    <div class="new-position col-sm-12">
         <table class="table">
             <thead>
                 <tr>
                 <th scope="col">#</th>
-                <th scope="col">Beschreibung</th>
+                <th scope="col">Bezeichnung</th>
                 <th scope="col">Anzahl</th>
                 <th scope="col">Netto</th>
                 <th scope="col">MwSt.%</th>
@@ -12,12 +12,53 @@
                 </tr>
             </thead>
             <tbody v-for="(position, index) in allPositions" :key="position.id">
-                <invoice-single-position-component :inputData="position" :id="index"></invoice-single-position-component>
+                <invoice-single-position-component :inputData="position"></invoice-single-position-component>
                    
             </tbody>
         </table>
-        <div class="d-flex justify-content-center">
-            <a class="add_position btn btn-primary"  @click="addPosition()">Weitere Position hinzufügen</a>
+        <!-- HIDDEN INPUT POSITION STORE-->
+        <input id="positionsInput" type="hidden" :value="allPositionsToString"/>
+        <div class="d-flex">
+            <a class="add_position btn btn-primary"  @click="addPosition()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"></path></svg>
+                Weitere Position hinzufügen</a>
+        </div>
+
+        <div class="d-flex justify-content-end">
+            <div class="sum-table offset-8 col-4 text-right">
+                <div class="row">
+                    <div class="col-6">
+                        Netto
+                    </div>
+                    <div class="col-6">
+                        {{getSum.netto}}€
+                    </div>
+                </div>
+                <!-- MWST -->
+
+                <div v-for="(mwst, index) in getSum.mwst" :key="mwst">
+                    <div class="row">
+                        <div class="col-6">
+                        MwSt. {{index}}%
+                    </div>
+                    <div class="col-6 text-align-right">
+                        {{mwst}}€
+                    </div>
+                    </div>
+                    
+                </div>
+                <!-- GESAMT -->
+                <div class="row">
+                    <div class="col-6">
+                        GESAMT
+                    </div>
+                    <div class="col-6">
+                        {{getSum.brutto}}€
+                    </div>
+                </div>
+                
+            </div>
+
         </div>
     </div>
 </template>
@@ -26,9 +67,7 @@
     import { mapGetters, mapMutations } from 'vuex';
     export default {
         computed: {
-            ...mapGetters(['allPositions', 'defaultPosition']),
-        },
-        data() {
+            ...mapGetters(['allPositions', 'defaultPosition', 'getSum', 'allPositionsToString']),
         },
         methods:{
             ...mapMutations(['addPosition']),
