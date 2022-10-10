@@ -19915,18 +19915,6 @@ __webpack_require__.r(__webpack_exports__);
     this.invoiceData.invoice_date = (0,_helpers__WEBPACK_IMPORTED_MODULE_1__.dateToString)((0,_helpers__WEBPACK_IMPORTED_MODULE_1__.splitDateString)(this.invoiceData.invoice_date));
     this.invoiceData.customer_name = this.invoiceData.customer_name.length > 25 ? this.invoiceData.customer_name.substring(0, 23) + "..." : this.invoiceData.customer_name;
     this.invoiceData.invoice_description = this.invoiceData.invoice_description.length > 25 ? this.invoiceData.invoice_description.substring(0, 23) + "..." : this.invoiceData.invoice_description;
-    console.log("MWST", this.mwst);
-    /**
-    let mwstArray = this.mwst.slice(1, -1).split(",");
-    console.log(mwstArray);
-    for(const mwst of mwstArray){
-        let val = parseFloat(JSON.parse(mwst).value);
-        console.log(val)
-    }
-    
-    console.log(mwsttotal);
-    */
-
     this.invoiceData.netto_total = (0,_helpers__WEBPACK_IMPORTED_MODULE_1__.printCurrency)(this.invoiceData.netto_total);
     this.invoiceData.brutto_total = (0,_helpers__WEBPACK_IMPORTED_MODULE_1__.printCurrency)(this.invoiceData.brutto_total);
     this.invoiceData.mwst_total = (0,_helpers__WEBPACK_IMPORTED_MODULE_1__.printCurrency)(this.invoiceData.mwst_total);
@@ -20000,8 +19988,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ["oldPositions"],
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['allPositions', 'defaultPosition', 'getSum', 'allPositionsToString'])),
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)(['addPosition'])), {}, {
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)(['addPosition', 'initPositions'])), {}, {
     sumForInput: function sumForInput() {
       var sum = {
         netto: parseFloat((0,_helpers__WEBPACK_IMPORTED_MODULE_0__.toFloat)(this.getSum.netto)).toFixed(2),
@@ -20009,10 +19998,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         mwst: (parseFloat((0,_helpers__WEBPACK_IMPORTED_MODULE_0__.toFloat)(this.getSum.brutto)) - parseFloat((0,_helpers__WEBPACK_IMPORTED_MODULE_0__.toFloat)(this.getSum.netto))).toFixed(2)
       };
       return sum;
+    },
+    initialOldPositions: function initialOldPositions() {
+      this.initPositions((0,_helpers__WEBPACK_IMPORTED_MODULE_0__.parseToJsonArray)(this.oldPositions));
     }
   }),
   mounted: function mounted() {
-    this.addPosition();
+    if (this.oldPositions !== undefined) {
+      this.initialOldPositions();
+    } else {
+      this.addPosition();
+    }
   }
 });
 
@@ -20885,7 +20881,7 @@ var _hoisted_11 = {
   "class": "sum-table offset-8 col-4 text-right"
 };
 var _hoisted_12 = {
-  "class": "row"
+  "class": "row netto-sum"
 };
 
 var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
@@ -20907,7 +20903,7 @@ var _hoisted_17 = {
   "class": "col-6 text-align-right"
 };
 var _hoisted_18 = {
-  "class": "row"
+  "class": "row brutto-sum"
 };
 
 var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
@@ -20969,6 +20965,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" MWST "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.getSum.mwst, function (mwst, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+      "class": "mwst-list",
       key: mwst
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, " MwSt. " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(index) + "% ", 1
     /* TEXT */
@@ -22004,6 +22001,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   actions: {},
   mutations: {
+    initPositions: function initPositions(state, positions) {
+      state.positions = positions;
+      this.commit("calculateSum");
+    },
     addPosition: function addPosition(state) {
       var newDefaultPosition = Object.assign({}, state.defaultPosition);
       newDefaultPosition.id = state.positions.length;

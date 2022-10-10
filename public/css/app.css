@@ -9369,8 +9369,16 @@ body {
 .invoice-table tbody tr .brutto {
   color: #51916c;
 }
+
 .invoice-list .row {
   gap: 30px;
+}
+
+.sum-table .netto-sum, .sum-table .brutto-sum {
+  font-weight: 700;
+}
+.sum-table .brutto-sum {
+  font-size: 1.25rem;
 }
 
 .invoice-list-element {

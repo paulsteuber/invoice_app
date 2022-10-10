@@ -249,7 +249,7 @@
                                         <h2 class="h5">{{__('Rechnungspositionen')}}</h2>
                                     </div>
                                     <div class="card-body row">
-                                        <invoice-parent-position-component></invoice-parent-position-component>
+                                        <invoice-parent-position-component old-positions="{{$invoice->all_positions}}"></invoice-parent-position-component>
                                       <!--<invoice-position-component old-positions="{{$invoice->all_positions}}"></invoice-position-component> -->
                                     </div>
                                 </div>
@@ -291,7 +291,7 @@
                                             <div class="col-lg-7">
                                                 <label for="invoice_additional" class="col-md-12 col-form-label">{{ __('Ergänzende Anmerkung') }}</label>
                                                 <div class="col-md-12">
-                                                    <textarea id="invoice_additional" class="form-control @error('invoice_additional') is-invalid @enderror" name="invoice_additional" value="{{ $invoice->invoice_pay_date }}" placeholder="{{'Weitere Informationen zu dieser Rechnung (z.B. Teilvorauszahlung)'}}"></textarea>
+                                                    <textarea id="invoice_additional" class="form-control @error('invoice_additional') is-invalid @enderror" name="invoice_additional" value="{{ $invoice->invoice_additional }}" placeholder="{{'Weitere Informationen zu dieser Rechnung (z.B. Teilvorauszahlung)'}}"></textarea>
 
                                                     @error('invoice_additional')
                                                         <span class="invalid-feedback" role="alert">

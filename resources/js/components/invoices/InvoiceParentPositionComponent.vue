@@ -29,7 +29,7 @@
 
         <div class="d-flex justify-content-end">
             <div class="sum-table offset-8 col-4 text-right">
-                <div class="row">
+                <div class="row netto-sum">
                     <div class="col-6">
                         Netto
                     </div>
@@ -39,7 +39,7 @@
                 </div>
                 <!-- MWST -->
 
-                <div v-for="(mwst, index) in getSum.mwst" :key="mwst">
+                <div class="mwst-list" v-for="(mwst, index) in getSum.mwst" :key="mwst">
                     <div class="row">
                         <div class="col-6">
                         MwSt. {{index}}%
@@ -51,11 +51,11 @@
                     
                 </div>
                 <!-- GESAMT -->
-                <div class="row">
+                <div class="row brutto-sum">
                     <div class="col-6">
                         GESAMT
                     </div>
-                    <div class="col-6">
+                    <div class="col-6 ">
                         {{getSum.brutto}}€
                     </div>
                 </div>
@@ -67,14 +67,17 @@
 </template>
 
 <script>   
-    import { toFloat } from '../../helpers';
+    import { toFloat, parseToJsonArray } from '../../helpers';
     import { mapGetters, mapMutations } from 'vuex';
     export default {
+        props:[
+            "oldPositions"
+        ],
         computed: {
             ...mapGetters(['allPositions', 'defaultPosition', 'getSum', 'allPositionsToString']),
         },
         methods:{
-            ...mapMutations(['addPosition']),
+            ...mapMutations(['addPosition', 'initPositions']),
             
             sumForInput: function(){
                 const sum = {
@@ -83,10 +86,19 @@
                     mwst: (parseFloat(toFloat(this.getSum.brutto)) - parseFloat(toFloat(this.getSum.netto))).toFixed(2),
                 };
                 return sum;
+            },
+            initialOldPositions:function(){
+                this.initPositions(parseToJsonArray(this.oldPositions));
             }
         },
         mounted(){
-            this.addPosition();
+            if(this.oldPositions !== undefined){
+                this.initialOldPositions();
+            } else {
+                this.addPosition();
+            }
+            
+            
         }
         
     }

@@ -87,17 +87,6 @@
             this.invoiceData.customer_name = this.invoiceData.customer_name.length > 25 ? this.invoiceData.customer_name.substring(0, 23)+"...": this.invoiceData.customer_name;
             this.invoiceData.invoice_description = this.invoiceData.invoice_description.length > 25 ? this.invoiceData.invoice_description.substring(0, 23)+"...": this.invoiceData.invoice_description;
             
-            console.log("MWST", this.mwst)
-            /**
-            let mwstArray = this.mwst.slice(1, -1).split(",");
-            console.log(mwstArray);
-            for(const mwst of mwstArray){
-                let val = parseFloat(JSON.parse(mwst).value);
-                console.log(val)
-            }
-            
-            console.log(mwsttotal);
-           */
             this.invoiceData.netto_total = printCurrency(this.invoiceData.netto_total);
             this.invoiceData.brutto_total = printCurrency(this.invoiceData.brutto_total); 
             this.invoiceData.mwst_total = printCurrency(this.invoiceData.mwst_total); 

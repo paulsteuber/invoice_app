@@ -23,15 +23,20 @@
             .brutto{
                 color: #51916c;
             }
-            .mwst{
-                
-            }
         }
     }
 }
 .invoice-list{
     .row{
         gap: 30px;
+    }
+}
+.sum-table{
+    .netto-sum, .brutto-sum{
+        font-weight: 700;
+    }
+    .brutto-sum{
+        font-size: 1.25rem;
     }
 }
 .invoice-list-element{

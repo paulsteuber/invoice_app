@@ -38,6 +38,10 @@ export default{
 
     },
     mutations:{
+        initPositions(state, positions){
+            state.positions = positions;
+            this.commit("calculateSum");
+        },
         addPosition(state){
             let newDefaultPosition =  Object.assign({}, state.defaultPosition);
             newDefaultPosition.id = state.positions.length;
