@@ -19895,23 +19895,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helpers */ "./resources/js/helpers.js");
+/* harmony import */ var _invoice_pdf__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../invoice_pdf */ "./resources/js/invoice_pdf.js");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../helpers */ "./resources/js/helpers.js");
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ["invoice", "mwst", "editRoute"],
   data: function data() {
     return {
-      invoiceData: JSON.parse(this.invoice),
-      allPosis: (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.parseToJsonArray)(JSON.parse(this.invoice).all_positions)
+      invoiceData: JSON.parse(this.invoice)
     };
   },
   methods: {
     createPDF: function createPDF() {
-      generateInvoicePDF(this.invoiceData);
+      (0,_invoice_pdf__WEBPACK_IMPORTED_MODULE_0__.generateInvoicePDF)(this.invoiceData);
     }
   },
   created: function created() {
-    this.invoiceData.invoice_date = (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.dateToString)((0,_helpers__WEBPACK_IMPORTED_MODULE_0__.splitDateString)(this.invoiceData.invoice_date));
+    this.invoiceData.invoice_date = (0,_helpers__WEBPACK_IMPORTED_MODULE_1__.dateToString)((0,_helpers__WEBPACK_IMPORTED_MODULE_1__.splitDateString)(this.invoiceData.invoice_date));
     this.invoiceData.customer_name = this.invoiceData.customer_name.length > 25 ? this.invoiceData.customer_name.substring(0, 23) + "..." : this.invoiceData.customer_name;
     this.invoiceData.invoice_description = this.invoiceData.invoice_description.length > 25 ? this.invoiceData.invoice_description.substring(0, 23) + "..." : this.invoiceData.invoice_description;
     console.log("MWST", this.mwst);
@@ -19926,9 +19927,9 @@ __webpack_require__.r(__webpack_exports__);
     console.log(mwsttotal);
     */
 
-    this.invoiceData.netto_total = (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.printCurrency)(this.invoiceData.netto_total);
-    this.invoiceData.brutto_total = (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.printCurrency)(this.invoiceData.brutto_total);
-    this.invoiceData.mwst_total = (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.printCurrency)(this.invoiceData.mwst_total);
+    this.invoiceData.netto_total = (0,_helpers__WEBPACK_IMPORTED_MODULE_1__.printCurrency)(this.invoiceData.netto_total);
+    this.invoiceData.brutto_total = (0,_helpers__WEBPACK_IMPORTED_MODULE_1__.printCurrency)(this.invoiceData.brutto_total);
+    this.invoiceData.mwst_total = (0,_helpers__WEBPACK_IMPORTED_MODULE_1__.printCurrency)(this.invoiceData.mwst_total);
   },
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -21071,7 +21072,7 @@ var _hoisted_12 = {
   "class": "text-right"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.inputData.id), 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.inputData.id + 1), 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
@@ -21517,7 +21518,26 @@ function dateToString(date) {
 /*!*************************************!*\
   !*** ./resources/js/invoice_pdf.js ***!
   \*************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "generateInvoicePDF": () => (/* binding */ generateInvoicePDF)
+/* harmony export */ });
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers */ "./resources/js/helpers.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 pdfMake.fonts = {
   // download default Roboto font from cdnjs.com
@@ -21528,28 +21548,330 @@ pdfMake.fonts = {
     bolditalics: 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/fonts/Roboto/Roboto-MediumItalic.ttf'
   }
 };
-jQuery(function ($) {
-  function floatToPrice(val) {
-    var stringVal = String(val);
-    var splitted = stringVal.split(".");
+function generateInvoicePDF(data) {
+  var ALL_POSITIONS = (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.parseToJsonArray)(data.all_positions);
+  var specialData = {
+    shortCustomerName: data.customer_name.length > 26 ? data.customer_name.split(" ")[0] : data.customer_name,
+    partial_date: new Date(data.invoice_partial_pay_date),
+    date: new Date(data.invoice_date),
+    partial_pay_text: "Bitte überweisen Sie den Teilbetrag in Höhe von " + data.invoice_partial_pay_sum + "€ bis zum " + ".",
+    partial_pay_text_rest: "Den Restbetrag in Höhe von " + "€ überweisen Sie bitte bis zum " + " ohne Abzug von Skonto auf das unten angegebene Konto.",
+    not_partial_pay_text: 'Ich bitte Sie um die Begleichung der in Rechnung gestellten Summe innerhalb von 14 Tagen ohne Abzug von Skonto auf das unten angegebene Konto.'
+  }; // CUSTOMER ADDRESS
 
-    if (splitted.length > 1) {
-      if (splitted[1].length > 1) {
-        return splitted[0] + "," + splitted[1];
-      } else {
-        return splitted[0] + "," + splitted[1] + "0";
-      }
+  var customerAddress = [{
+    text: data.customer_name,
+    style: 'customer'
+  }, {
+    text: data.customer_alias,
+    style: 'customer'
+  }, {
+    text: data.customer_street,
+    style: 'customer'
+  }, {
+    text: data.customer_zip + " " + data.customer_city,
+    style: 'customer',
+    margin: [0, 0, 0, 5]
+  }]; // YOUR OWN ADDRESS
+
+  var ownAddress = [{
+    text: data.name,
+    style: 'own_adress'
+  }, {
+    text: data.street,
+    style: 'own_adress'
+  }, {
+    text: data.zip + " " + data.city,
+    style: 'own_adress'
+  }, {
+    text: data.invoice_date,
+    style: 'own_adress',
+    margin: [0, 10, 0, 0]
+  }, {
+    text: "Rechnungsnummer: " + data.invoice_number,
+    style: 'own_adress',
+    bold: true,
+    margin: [0, 0, 0, 0]
+  }];
+  var invoiceDescription = [{
+    text: data.invoice_description,
+    style: 'sub_headline',
+    bold: true,
+    color: '#b5b5b5',
+    margin: [0, 0, 0, 10]
+  }];
+  /**
+   * 
+   *  LOOP ALL POSITIONS
+   * 
+   */
+
+  var position_list = [[{
+    text: '#',
+    bold: true
+  }, {
+    text: 'Beschreibung',
+    bold: true
+  }, {
+    text: 'Anzahl',
+    bold: true
+  }, {
+    text: 'Netto',
+    bold: true
+  }, {
+    text: 'MwSt.',
+    bold: true
+  }, {
+    text: 'Netto Total',
+    bold: true
+  }]];
+  ALL_POSITIONS.forEach(function (pos, index) {
+    console.log(pos);
+    var pos = [index + 1, pos.description, pos.quantity, (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.printCurrency)((0,_helpers__WEBPACK_IMPORTED_MODULE_0__.toFloat)(pos.netto)) + "€", pos.mwst_rate + "%", {
+      text: (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.printCurrency)((0,_helpers__WEBPACK_IMPORTED_MODULE_0__.toFloat)(pos.netto_total)) + "€",
+      bold: true,
+      alignment: 'right'
+    }];
+    position_list.push(pos);
+  });
+  var positionTable = [{
+    layout: 'lightHorizontalLines',
+    // optional
+    table: {
+      // headers are automatically repeated if the table spans over multiple pages
+      // you can declare how many rows should be treated as headers
+      headerRows: 1,
+      widths: ['auto', '*', 'auto', 'auto', 'auto', 'auto'],
+      body: position_list
+    },
+    style: "normal"
+  }];
+  var nettoTotal = {
+    columns: [{
+      // auto-sized columns have their widths based on their content
+      width: 'auto',
+      text: 'Netto'
+    }, {
+      // star-sized columns fill the remaining space
+      // if there's more than one star-column, available width is divided equally
+      width: '*',
+      text: {
+        text: data.netto_total + "€"
+      },
+      alignment: 'right'
+    }],
+    style: 'normal',
+    // optional space between columns
+    columnGap: 10,
+    margin: [330, 20, 0, 0]
+  };
+  /**
+   * 
+   *  LOOP ALL MWSTs
+   * 
+   */
+
+  var mwstArr = {};
+  ALL_POSITIONS.forEach(function (pos, index) {
+    //mwst
+    if (mwstArr[pos.mwst_rate] !== undefined) {
+      mwstArr[pos.mwst_rate] = mwstArr[pos.mwst_rate] + (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.toFloat)(pos.mwst_total);
     } else {
-      return splitted[0] + ",00";
+      mwstArr[pos.mwst_rate] = (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.toFloat)(pos.mwst_total);
     }
+  });
+  var mwstColumns = [];
+
+  for (var _i = 0, _Object$entries = Object.entries(mwstArr); _i < _Object$entries.length; _i++) {
+    var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+        key = _Object$entries$_i[0],
+        value = _Object$entries$_i[1];
+
+    mwstColumns.push({
+      columns: [{
+        // auto-sized columns have their widths based on their content
+        width: 'auto',
+        text: 'MwSt. ' + key + "%"
+      }, {
+        // star-sized columns fill the remaining space
+        // if there's more than one star-column, available width is divided equally
+        width: '*',
+        text: {
+          text: (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.printCurrency)(value) + "€"
+        },
+        alignment: 'right'
+      }],
+      style: 'normal',
+      // optional space between columns
+      columnGap: 10,
+      margin: [330, 0, 0, 0]
+    });
   }
 
-  $(".pdfDownload").on("click", function () {
-    var actionRow = $(this).parents(".actions");
-    console.log("pdf", actionRow.find(".hidden_invoice_data").val().toString());
-    var data = JSON.parse(actionRow.find(".hidden_invoice_data").val());
-    var shortCustomerName = data.customer_name.length > 26 ? data.customer_name.split(" ")[0] : data.customer_name;
-    var invoiceDate = $(actionRow).find(".invoice_date").text();
+  var bruttoTotal = {
+    columns: [{
+      // auto-sized columns have their widths based on their content
+      width: 'auto',
+      text: {
+        text: 'Brutto',
+        bold: true
+      }
+    }, {
+      // star-sized columns fill the remaining space
+      // if there's more than one star-column, available width is divided equally
+      width: '*',
+      text: {
+        text: data.brutto_total + "€",
+        bold: true
+      },
+      alignment: 'right'
+    }],
+    style: 'normal',
+    // optional space between columns
+    columnGap: 10,
+    margin: [330, 0, 0, 0]
+  };
+  var bankTransfer = [{
+    columns: [{
+      // auto-sized columns have their widths based on their content
+      width: 120,
+      text: 'Kontoinhaber'
+    }, {
+      // star-sized columns fill the remaining space
+      // if there's more than one star-column, available width is divided equally
+      width: 'auto',
+      text: data.name
+    }],
+    style: 'normal',
+    // optional space between columns
+    columnGap: 10
+  }, {
+    columns: [{
+      width: 120,
+      text: 'IBAN'
+    }, {
+      width: 'auto',
+      text: data.iban
+    }],
+    style: 'normal',
+    // optional space between columns
+    columnGap: 10
+  }, {
+    columns: [{
+      width: 120,
+      text: 'BIC'
+    }, {
+      width: 'auto',
+      text: data.bic
+    }],
+    style: 'normal',
+    // optional space between columns
+    columnGap: 10
+  }, {
+    columns: [{
+      width: 120,
+      text: 'Bank'
+    }, {
+      width: 'auto',
+      text: data.bank
+    }],
+    style: 'normal',
+    // optional space between columns
+    columnGap: 10
+  }, {
+    columns: [{
+      width: 120,
+      text: 'Verwendungszweck'
+    }, {
+      width: 'auto',
+      text: data.invoice_number + " " + specialData.shortCustomerName
+    }],
+    style: 'normal',
+    // optional space between columns
+    columnGap: 10
+  }, {
+    columns: [{
+      width: 120,
+      text: 'Betrag'
+    }, {
+      width: 'auto',
+      text: data.invoice_partial_pay ? data.invoice_partial_pay_sum + "€ (erster Teilbetrag) | " + "€ (zweiter Teilbetrag)" : data.brutto_total + "€"
+    }],
+    style: 'normal',
+    // optional space between columns
+    columnGap: 10
+  }, {
+    text: 'Vielen Dank für Ihren Auftrag!',
+    margin: [0, 10, 0, 0],
+    style: 'normal'
+  }, {
+    text: 'Mit freundlichen Grüßen',
+    margin: [0, 0, 0, 10],
+    style: 'normal'
+  }, {
+    text: data.name,
+    style: 'normal'
+  }];
+  var footer = {
+    columns: [{
+      width: 'auto',
+      text: data.name + "\n" + data.street + "\n" + data.zip + " " + data.city
+    }, {
+      width: 'auto',
+      text: "E-Mail: " + data.mail + "\n" + "Webseite: " + data.url + "\n" + "Telefon: " + data.phone + "\n" + "USt-ID: " + data.tax_id
+    }, {
+      width: 'auto',
+      text: "IBAN: " + data.iban + "\n" + "BIC: " + data.bic + "\n" + "Bank: " + data.bank + "\n"
+    }],
+    style: 'small',
+    color: '#b5b5b5',
+    margin: [0, 15, 0, 0],
+    // optional space between columns
+    columnGap: 20
+  };
+  /** PDF MAKE */
+
+  var dataToPDF = {
+    content: [customerAddress, ownAddress, invoiceDescription, positionTable, nettoTotal, mwstColumns, bruttoTotal, bankTransfer, footer],
+    styles: {
+      normal: {
+        fontSize: 9,
+        lineHeight: 1.2
+      },
+      customer: {
+        fontSize: 11,
+        lineHeight: 1.2
+      },
+      own_adress: {
+        fontSize: 9,
+        lineHeight: 1.2,
+        alignment: 'right'
+      },
+      headline: {
+        fontSize: 20,
+        lineHeight: 1.3
+      },
+      sub_headline: {
+        fontSize: 14,
+        lineHeight: 1.2
+      },
+      large: {
+        fontSize: 12
+      },
+      small: {
+        fontSize: 7,
+        lineHeight: 1.1
+      }
+    },
+    // a string or { width: number, height: number }
+    pageSize: 'A4',
+    // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
+    pageMargins: [80, 100, 80, 40]
+  };
+  pdfMake.createPdf(dataToPDF).download(data.invoice_number + " " + specialData.shortCustomerName + " Rechnung");
+}
+jQuery(function ($) {
+  $("#pdfDownload").on("click", function () {
     console.log(data.positions);
     var positions_json = JSON.parse(data.all_positions);
     var all_positions = [[{
@@ -21579,275 +21901,7 @@ jQuery(function ($) {
       }];
       all_positions.push(this_position);
     });
-    var mwst_json = JSON.parse(data.mwst_total);
-    var mwst_columns = [];
-    $(mwst_json).each(function (index) {
-      mwst_columns.push({
-        columns: [{
-          // auto-sized columns have their widths based on their content
-          width: 'auto',
-          text: 'MwSt. ' + this.percent + "%"
-        }, {
-          // star-sized columns fill the remaining space
-          // if there's more than one star-column, available width is divided equally
-          width: '*',
-          text: {
-            text: floatToPrice(this.value) + "€"
-          },
-          alignment: 'right'
-        }],
-        style: 'normal',
-        // optional space between columns
-        columnGap: 10,
-        margin: [330, 0, 0, 0]
-      });
-    });
-    var partial_data = {
-      p_date: new Date(data.invoice_partial_pay_date),
-      date: new Date(data.invoice_date)
-    };
-
-    function dateToString(date) {
-      return date.getDate() + "." + date.getMonth() + 1 + "." + date.getFullYear();
-    }
-
-    function partialRest(brutto, partial_brutto) {
-      return parseFloat(brutto) - parseFloat(partial_brutto);
-    }
-
-    var partial_pay_text = "Bitte überweisen Sie den Teilbetrag in Höhe von " + data.invoice_partial_pay_sum + "€ bis zum " + dateToString(partial_data.p_date) + ".";
-    var partial_pay_text_rest = "Den Restbetrag in Höhe von " + partialRest(data.brutto_total, data.invoice_partial_pay_sum) + "€ überweisen Sie bitte bis zum " + dateToString(partial_data.date) + " ohne Abzug von Skonto auf das unten angegebene Konto.";
-    var not_partial_pay_text = 'Ich bitte Sie um die Begleichung der in Rechnung gestellten Summe innerhalb von 14 Tagen ohne Abzug von Skonto auf das unten angegebene Konto.';
-    var dataToPDF = {
-      content: [{
-        text: data.customer_name,
-        style: 'customer'
-      }, {
-        text: data.customer_alias,
-        style: 'customer'
-      }, {
-        text: data.customer_street,
-        style: 'customer'
-      }, {
-        text: data.customer_zip + " " + data.customer_city,
-        style: 'customer',
-        margin: [0, 0, 0, 5]
-      }, {
-        text: data.name,
-        style: 'own_adress'
-      }, {
-        text: data.street,
-        style: 'own_adress'
-      }, {
-        text: data.zip + " " + data.city,
-        style: 'own_adress'
-      }, {
-        text: invoiceDate,
-        style: 'own_adress',
-        margin: [0, 10, 0, 0]
-      }, {
-        text: "Rechnungsnummer: " + data.invoice_number,
-        style: 'own_adress',
-        bold: true,
-        margin: [0, 0, 0, 0]
-      }, {
-        text: "Rechnung " + data.invoice_number + "-" + shortCustomerName,
-        style: 'headline',
-        bold: true,
-        margin: [0, 20, 0, 0]
-      }, {
-        text: data.invoice_description,
-        style: 'sub_headline',
-        bold: true,
-        color: '#b5b5b5',
-        margin: [0, 0, 0, 10]
-      }, {
-        layout: 'lightHorizontalLines',
-        // optional
-        table: {
-          // headers are automatically repeated if the table spans over multiple pages
-          // you can declare how many rows should be treated as headers
-          headerRows: 1,
-          widths: ['auto', '*', 'auto', 'auto', 'auto', 'auto'],
-          body: all_positions
-        },
-        style: "normal"
-      }, {
-        columns: [{
-          // auto-sized columns have their widths based on their content
-          width: 'auto',
-          text: 'Netto'
-        }, {
-          // star-sized columns fill the remaining space
-          // if there's more than one star-column, available width is divided equally
-          width: '*',
-          text: {
-            text: floatToPrice(data.netto_total) + "€"
-          },
-          alignment: 'right'
-        }],
-        style: 'normal',
-        // optional space between columns
-        columnGap: 10,
-        margin: [330, 20, 0, 0]
-      }, mwst_columns, {
-        columns: [{
-          // auto-sized columns have their widths based on their content
-          width: 'auto',
-          text: {
-            text: "SUMME",
-            bold: true
-          }
-        }, {
-          // star-sized columns fill the remaining space
-          // if there's more than one star-column, available width is divided equally
-          width: '*',
-          text: {
-            text: floatToPrice(data.brutto_total) + "€",
-            alignment: 'right',
-            bold: true
-          }
-        }],
-        style: 'normal',
-        // optional space between columns
-        columnGap: 10,
-        margin: [330, 10, 0, 0]
-      }, {
-        text: data.invoice_partial_pay ? partial_pay_text + partial_pay_text_rest : not_partial_pay_text,
-        margin: [0, 20, 0, 20],
-        style: 'normal'
-      }, {
-        columns: [{
-          // auto-sized columns have their widths based on their content
-          width: 120,
-          text: 'Kontoinhaber'
-        }, {
-          // star-sized columns fill the remaining space
-          // if there's more than one star-column, available width is divided equally
-          width: 'auto',
-          text: data.name
-        }],
-        style: 'normal',
-        // optional space between columns
-        columnGap: 10
-      }, {
-        columns: [{
-          width: 120,
-          text: 'IBAN'
-        }, {
-          width: 'auto',
-          text: data.iban
-        }],
-        style: 'normal',
-        // optional space between columns
-        columnGap: 10
-      }, {
-        columns: [{
-          width: 120,
-          text: 'BIC'
-        }, {
-          width: 'auto',
-          text: data.bic
-        }],
-        style: 'normal',
-        // optional space between columns
-        columnGap: 10
-      }, {
-        columns: [{
-          width: 120,
-          text: 'Bank'
-        }, {
-          width: 'auto',
-          text: data.bank
-        }],
-        style: 'normal',
-        // optional space between columns
-        columnGap: 10
-      }, {
-        columns: [{
-          width: 120,
-          text: 'Verwendungszweck'
-        }, {
-          width: 'auto',
-          text: data.invoice_number + " " + shortCustomerName
-        }],
-        style: 'normal',
-        // optional space between columns
-        columnGap: 10
-      }, {
-        columns: [{
-          width: 120,
-          text: 'Betrag'
-        }, {
-          width: 'auto',
-          text: data.invoice_partial_pay ? data.invoice_partial_pay_sum + "€ (erster Teilbetrag) | " + partialRest(data.brutto_total, data.invoice_partial_pay_sum) + "€ (zweiter Teilbetrag)" : floatToPrice(data.brutto_total) + "€"
-        }],
-        style: 'normal',
-        // optional space between columns
-        columnGap: 10
-      }, {
-        text: 'Vielen Dank für Ihren Auftrag!',
-        margin: [0, 10, 0, 0],
-        style: 'normal'
-      }, {
-        text: 'Mit freundlichen Grüßen',
-        margin: [0, 0, 0, 10],
-        style: 'normal'
-      }, {
-        text: data.name,
-        style: 'normal'
-      }, {
-        columns: [{
-          width: 'auto',
-          text: data.name + "\n" + data.street + "\n" + data.zip + " " + data.city
-        }, {
-          width: 'auto',
-          text: "E-Mail: " + data.mail + "\n" + "Webseite: " + data.url + "\n" + "Telefon: " + data.phone + "\n" + "USt-ID: " + data.tax_id
-        }, {
-          width: 'auto',
-          text: "IBAN: " + data.iban + "\n" + "BIC: " + data.bic + "\n" + "Bank: " + data.bank + "\n"
-        }],
-        style: 'small',
-        color: '#b5b5b5',
-        margin: [0, 15, 0, 0],
-        // optional space between columns
-        columnGap: 20
-      }],
-      styles: {
-        normal: {
-          fontSize: 9,
-          lineHeight: 1.2
-        },
-        customer: {
-          fontSize: 11,
-          lineHeight: 1.2
-        },
-        own_adress: {
-          fontSize: 9,
-          lineHeight: 1.2,
-          alignment: 'right'
-        },
-        headline: {
-          fontSize: 20,
-          lineHeight: 1.3
-        },
-        sub_headline: {
-          fontSize: 14,
-          lineHeight: 1.2
-        },
-        large: {
-          fontSize: 12
-        },
-        small: {
-          fontSize: 7,
-          lineHeight: 1.1
-        }
-      },
-      // a string or { width: number, height: number }
-      pageSize: 'A4',
-      // [left, top, right, bottom] or [horizontal, vertical] or just a number for equal margins
-      pageMargins: [80, 100, 80, 40]
-    };
+    var dataToPDF = {};
     pdfMake.createPdf(dataToPDF).download(data.invoice_number + " " + shortCustomerName + " Rechnung");
   });
 });

@@ -62,6 +62,7 @@
 </template>
 
 <script>
+    import {generateInvoicePDF} from '../../invoice_pdf'
     import {parseToJsonArray, dateToString, splitDateString, printCurrency} from '../../helpers'
     export default {
         props:[
@@ -72,8 +73,7 @@
         
         data (){
             return {
-               invoiceData: JSON.parse(this.invoice),
-                allPosis: parseToJsonArray(JSON.parse(this.invoice).all_positions)
+               invoiceData: JSON.parse(this.invoice)
             }
         },
         methods:{

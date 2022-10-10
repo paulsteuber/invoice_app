@@ -1,7 +1,7 @@
 <template>
     <tr>
         <th scope="row">
-           {{inputData.id}}
+           {{inputData.id+1}}
         </th>
         <td class="add_description">
             <input type="text" class="form-control" v-model="inputData.description" placeholder="Bezeichnung">
