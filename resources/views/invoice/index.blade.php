@@ -12,6 +12,10 @@
                         @foreach(Auth::user()->invoices as $invoice)
                             <invoice-list-element-component invoice="{{$invoice}}" mwst="{{$invoice->mwst_total}}" edit-route="{{route('invoice.edit', $invoice->id)}}"></invoice-list-element-component>
                         @endforeach
+             <!--           @foreach(Auth::user()->invoices as $invoice)
+                            <invoice-list-element-component invoice="{{$invoice}}" mwst="{{$invoice->mwst_total}}" edit-route="{{route('invoice.edit', $invoice->id)}}"></invoice-list-element-component>
+                        @endforeach -->
+
                     </div>
                 </div>
                     </tbody>

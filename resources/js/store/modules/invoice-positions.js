@@ -60,6 +60,13 @@ export default{
 
             this.commit("calculateSum");
         },
+        copyPosition(state, copyPos){
+            const newPos =  Object.assign({}, copyPos);
+            newPos.id = state.positions.length;
+            state.positions.push(newPos);
+            this.commit("calculateSum");
+
+        },
         updatePosition(state, updatePos){
             state.positions[updatePos.id] = updatePos;
             this.commit("calculateSum");

@@ -27,7 +27,9 @@ class InvoicesController extends Controller
      */
     public function index(Customer $customer)
     {
-        return view('invoice.index',compact('customer'));
+        $user = Auth::user();
+        $invoices =  $user->invoices;
+        return view('invoice.index',compact('customer', 'invoices'));
     }
     public function create()
     {

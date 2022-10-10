@@ -17,7 +17,10 @@
             </tbody>
         </table>
         <!-- HIDDEN INPUT POSITION STORE-->
-        <input id="positionsInput" type="hidden" :value="allPositionsToString"/>
+        <input id="all_positions" name="all_positions" type="hidden" :value="allPositionsToString"/>
+        <input id="netto_total" name="netto_total" type="hidden" :value="sumForInput().netto"/>
+        <input id="brutto_total" name="brutto_total" type="hidden" :value="sumForInput().brutto"/>
+        <input id="mwst_total" name="mwst_total" type="hidden" :value="sumForInput().mwst"/>
         <div class="d-flex">
             <a class="add_position btn btn-primary"  @click="addPosition()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16"><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"></path></svg>
@@ -64,6 +67,7 @@
 </template>
 
 <script>   
+    import { toFloat } from '../../helpers';
     import { mapGetters, mapMutations } from 'vuex';
     export default {
         computed: {
@@ -71,6 +75,15 @@
         },
         methods:{
             ...mapMutations(['addPosition']),
+            
+            sumForInput: function(){
+                const sum = {
+                    netto: parseFloat(toFloat(this.getSum.netto)).toFixed(2),
+                    brutto: parseFloat(toFloat(this.getSum.brutto)).toFixed(2),
+                    mwst: (parseFloat(toFloat(this.getSum.brutto)) - parseFloat(toFloat(this.getSum.netto))).toFixed(2),
+                };
+                return sum;
+            }
         },
         mounted(){
             this.addPosition();
