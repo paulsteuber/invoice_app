@@ -92,7 +92,7 @@
                     <div class="container">
 
                         <div class="main-header">
-                            <div class="button-list d-flex justify-content-center">
+                            <div class="button-list d-flex justify-content-start">
                                 <a class="mh-btn shadow-sm d-flex align-items-center {{request()->routeIs('home')? 'active': ''}}" href="{{route('home')}}">{{__("Dashboard")}}</a>
                                 <a class="mh-btn shadow-sm d-flex align-items-center {{request()->routeIs('invoice.index')? 'active': ''}}" href="{{ route('invoice.index')}}">{{__("Rechnungen")}}</a>
                                 <a class="mh-btn shadow-sm d-flex align-items-center {{request()->routeIs('customers')? 'active': ''}}" href="{{ route('customers')}}">{{__("Kunden")}}</a>

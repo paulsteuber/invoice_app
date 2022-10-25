@@ -4,9 +4,9 @@
 <div class="container-fluid invoice-create">
     <div class="row justify-content-center">
         <div class="container">
-            <div class="card">
+            <div class="card shadow">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h1>{{ __('Neue Rechnung erstellen') }}</h1>
+                    <h3 class="h6 fw-bolder">{{ __('Neue Rechnung erstellen') }}</h3>
                 </div>
 
                 <div class="card-body row">
@@ -226,8 +226,10 @@
                                             <div class="row">
                                                 <label for="invoice_date" class="col-md-12 col-form-label">{{ __('Rechnungsdatum') }}</label>
                                                 <div class="col-md-12">
+                                                <invoice-date-picker input-classes="form-control @error('invoice_date') is-invalid @enderror" placeholder="{{$invoice->invoice_date  ?? date('Y-m-d') }}" date="{{ $invoice->invoice_date  ?? date('Y-m-d') }}"></invoice-date-picker>
+                                                <!--
                                                     <input id="invoice_date" type="date" class="form-control @error('invoice_date') is-invalid @enderror" name="invoice_date" value="{{ old('invoice_date') ?? date('Y-m-d')   }}" placeholder="{{old('invoice_date') ?? date('Y-m-d') }} " required>
-
+-->
                                                     @error('invoice_date')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -266,7 +268,7 @@
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <label for="invoice_pay_date" class="col-form-label">{{ __('Gesamt Zahlungsziel') }}</label>
-                                                            <input id="invoice_pay_date" type="date" class="col-lg-12 form-control @error('invoice_pay_date') is-invalid @enderror" name="invoice_pay_date" value="{{ old('invoice_pay_date') ?? date('Y-m-d')   }}" placeholder="{{old('invoice_pay_date') ?? date('Y-m-d') }} " required>
+                                                        <invoice-pay-date-picker input-classes="form-control @error('invoice_pay_date') is-invalid @enderror"></invoice-pay-date-picker>    
 
                                                             @error('invoice_pay_date')
                                                                 <span class="invalid-feedback" role="alert">
@@ -304,9 +306,11 @@
                         <div class="col-md-12 mt-3">
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-6 d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Rechnung speichern') }}
-                                    </button>
+                                    <div class="row">
+                                        <button type="submit" class="btn btn-primary">
+                                            {{ __('Rechnung speichern') }}
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

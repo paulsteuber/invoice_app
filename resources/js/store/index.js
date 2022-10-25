@@ -1,6 +1,7 @@
 import { createStore } from 'vuex'
 
-import Positions from "./modules/invoice-positions";
+import InvoicePositions from "./modules/invoice-positions";
+import InvoiceDates from "./modules/invoice-dates";
 export default createStore({
     state:{
      
@@ -14,6 +15,7 @@ export default createStore({
 
     },
     modules:{
-        Positions
+        InvoicePositions,
+        InvoiceDates,
     }
   });

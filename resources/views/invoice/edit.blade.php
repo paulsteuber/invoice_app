@@ -4,9 +4,9 @@
 <div class="container-fluid invoice-create">
     <div class="row justify-content-center">
         <div class="container">
-            <div class="card">
+            <div class="card shadow">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h1>{{ __('Rechnung bearbeiten') }}</h1>
+                    <h3 class="h6 fw-bolder">{{ __('Rechnung bearbeiten') }}</h3>
                 </div>
 
                 <div class="card-body row">
@@ -18,12 +18,12 @@
                         @method('PATCH')
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="card customer-card mb-3">
+                            <div class="card shadow customer-card mb-3">
                                 <div class="card-header">
                                 @if($errors->any())
                                     {{ implode('', $errors->all('<div>:message</div>')) }}
                                 @endif
-                                    <h5>{{__('Kundeninformationen')}}</h5>
+                                    <h5 class="h6 fw-bolder mb-0">{{__('Kundeninformationen')}}</h5>
                                 </div>
                                 <div class="card-body row">
                                 <customer-component old-invoice-id="{{$invoice->id}}"></customer-component>
@@ -31,9 +31,9 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="card your-card mb-3">
+                            <div class="card shadow your-card mb-3">
                                 <div class="card-header">
-                                    <h5>{{__('Deine Kontaktinformationen')}}</h5>
+                                    <h5 class="h6 fw-bolder mb-0">{{__('Deine Kontaktinformationen')}}</h5>
                                 </div>
                                 <div class="card-body row">
                                 <div class="col-lg-6">
@@ -202,9 +202,9 @@
                     </div>
                         <div class="row mt-3">
                             <div class="col-md-12">
-                                <div class="card invoice-card">
+                                <div class="card invoice-card shadow">
                                     <div class="card-header">
-                                        <h2 class="h5">{{__('Invoice Settings')}}</h2>
+                                        <h2 class="h6 fw-bolder mb-0">{{__('Rechnungseinstellungen')}}</h2>
                                     </div>
                                     <div class="card-body row">
                                        <invoice-number-component next-invoice-number="{{$invoice->invoice_number}}"></invoice-number-component> 
@@ -228,8 +228,7 @@
                                             <div class="row">
                                                 <label for="invoice_date" class="col-md-12 col-form-label">{{ __('Rechnungsdatum') }}</label>
                                                 <div class="col-md-12">
-                                                    <input id="invoice_date" type="date" class="form-control @error('invoice_date') is-invalid @enderror" name="invoice_date" value="{{$invoice->invoice_date}}" placeholder="{{old('invoice_date') ?? date('Y-m-d') }} " required>
-
+                                                <invoice-date-picker input-classes="form-control @error('invoice_date') is-invalid @enderror" placeholder="{{$invoice->invoice_date  ?? date('Y-m-d') }}" date="{{ $invoice->invoice_date  ?? date('Y-m-d') }}"></invoice-date-picker>
                                                     @error('invoice_date')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -244,9 +243,9 @@
                         </div>
                         <div class="row mt-3">
                             <div class="col-md-12">
-                                <div class="card position-list-card">
+                                <div class="card position-list-card shadow">
                                     <div class="card-header">
-                                        <h2 class="h5">{{__('Rechnungspositionen')}}</h2>
+                                        <h2 class="h6 fw-bolder mb-0">{{__('Rechnungspositionen')}}</h2>
                                     </div>
                                     <div class="card-body row">
                                         <invoice-parent-position-component old-positions="{{$invoice->all_positions}}"></invoice-parent-position-component>
@@ -255,8 +254,8 @@
                                 </div>
                             </div>
                             <div class="col-md-12 mt-3">
-                                <div class="card additional-information">
-                                    <div class="card-header"><h2 class="h5">{{__('Zahlungsinformationen')}}</h2></div>
+                                <div class="card additional-information shadow">
+                                    <div class="card-header"><h2 class="h6 fw-bolder mb-0">{{__('Zahlungsinformationen')}}</h2></div>
                                         <div class="card-body row form-group">
                                             <div class="col-lg-5">
                                             @error('invoice_partial_pay', 'invoice_partial_pay_date', 'invoice_partial_pay_sum', 'invoice_pay_date', 'invoice_state', 'invoice_additional')
@@ -265,12 +264,11 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
-                                                <!-- <invoice-partial-pay-component old-invoice="{{$invoice}}"></invoice-partial-pay-component> -->
+                                                <!--  -->
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <label for="invoice_pay_date" class="col-form-label">{{ __('Gesamt Zahlungsziel') }}</label>
-                                                            <input id="invoice_pay_date" type="date" class="col-lg-12 form-control @error('invoice_pay_date') is-invalid @enderror" name="invoice_pay_date" value="{{ old('invoice_pay_date') ?? date('Y-m-d')   }}" placeholder="{{old('invoice_pay_date') ?? date('Y-m-d') }} " required>
-
+                                                            <invoice-pay-date-picker input-classes="form-control @error('invoice_pay_date') is-invalid @enderror" date="{{ $invoice->invoice_pay_date }}"></invoice-pay-date-picker>
                                                             @error('invoice_pay_date')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
@@ -307,9 +305,11 @@
                         <div class="col-md-12 mt-3">
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-6 d-flex justify-content-end">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Rechnung speichern') }}
-                                    </button>
+                                    <div class="row">
+                                        <button type="submit" class="btn btn-primary">
+                                            {{ __('Rechnung speichern') }}
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -322,8 +322,6 @@
                    @endif
                 </div>
             </div>
-        </div>
-        <div class="col-md-12">
         </div>
     </div>
 </div>

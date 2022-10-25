@@ -1,4 +1,3 @@
-
 export function toFloat(val) {
     if(val !== undefined){
         let removeDot = String(val).replace(/\./g, '');
@@ -13,7 +12,6 @@ export function addBracketsToArrayString(val){
         return "["+val+"]";
     }
     return val;
-    
 }
 export function parseToJsonArray(val) {
     const uniqueDivider = "#"
@@ -28,4 +26,19 @@ export function splitDateString(dateString){
 }
 export function dateToString(date){
     return date.getDate().toString().padStart(2, "0")+"."+date.getMonth().toString().padStart(2, "0")+"."+date.getFullYear();
+}
+
+export function dateToInputFormat(date,daysLater){
+    const dateObj = new Date(date);
+    daysLater = daysLater === undefined? 0 : daysLater;
+    const newDate = new Date(dateObj.getTime() + (daysLater * 24 * 60 * 60 * 1000));
+
+    console.log("xx", newDate);
+    const year = newDate.getFullYear();
+    let month = newDate.getMonth()+1;
+    month = month < 10 ? '0'+month: ''+month;
+    let day = newDate.getDate();
+    day = day < 10 ? '0'+day: ''+day;
+    console.log("newDate", year+"-"+month+"-"+day);
+    return year+"-"+month+"-"+day;
 }

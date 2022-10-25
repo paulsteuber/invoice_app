@@ -2,14 +2,19 @@
     <div class="col-md-4">
         <div class="row">
            <label for="name" class="col-md-12 col-form-label">Rechnungsnummer</label>
-           <div class="col-lg-6">
-            <h3 class="text-right">{{nextInvoiceNumber}}</h3>
+           <div class="col-lg-6 number-wrapper">
+            <input class="form-control" type="text" id="invoice_number" name="invoice_number" :placeholder="invoiceNumber" :value="invoiceNumber" @keyup="changeInput"/>
+            <p :class="warningVisibilityClass">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
+                    <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z"/>
+                    <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z"/>
+                </svg>
+                {{warningMessage}}</p>
            </div>
            <div class="col-lg-6 d-flex justify-content-center">
-                <a class="btn btn-primary " v-on:click="countIt(true)">+</a>
-                <a class="btn btn-outline-primary ml-1" v-on:click="countIt(false)">-</a>
+                <a class="btn btn-primary " v-on:click="numIncrease()">+</a>
+                <a class="btn btn-outline-primary ml-1" v-on:click="numDecrease()">-</a>
            </div>
-           <input type="hidden" id="invoice_number" name="invoice_number" :value="nextInvoiceNumber">
         </div>
     </div>
 
@@ -22,6 +27,9 @@ export default {
     ],
     data () {
         return {
+            invoiceNumber: this.nextInvoiceNumber,
+            warningMessage: '',
+            warningVisibilityClass : 'warning-message d-none'
         }
     },
         mounted() {
@@ -34,13 +42,43 @@ export default {
             */
         },
         methods:{
-            countIt: function(up){
-                if(this.nextInvoiceNumber == 0 && !up){
+            numIncrease: function(){
+                this.invoiceNumber++;
+            },
+            numDecrease: function(){
+                if(this.invoiceNumber === 1){
                     console.log("Negative Rechnungsnummer ist nicht erlaubt");
-                } else{
-                    console.log(this.nextInvoiceNumber);
-                     up ? this.nextInvoiceNumber++ : this.nextInvoiceNumber--;
+                    return;
                 }
+                this.invoiceNumber--;
+
+            },
+            checkInvoiceNumberExists: function(){
+            /*axios
+                .get('/json/auth/invoices')
+                .then(response => {
+                    this.customers = response.data;
+                })
+            */
+            },
+            changeInput: function(e) {
+                const val = e.target.value;
+                const newInvoice = String(val).replace(/\D/g, "");
+                this.invoiceNumber = newInvoice;
+                if(val.length !== newInvoice.length){
+                    this.warningActive(
+                        "Nur Ziffern werden übernommen"
+                    );
+                    return;
+                }
+                this.warningInactive();
+            },
+            warningInactive: function(){
+                this.warningVisibilityClass = 'warning-message d-none';
+            },
+            warningActive: function(message){
+                this.warningVisibilityClass = 'warning-message';
+                this.warningMessage = message;
             }
         },
         computed:{

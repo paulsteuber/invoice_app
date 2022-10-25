@@ -29,6 +29,8 @@ app
     .component('customer-overview-component', require('./components/customers/CustomerOverviewComponent.vue').default)
     .component('invoice-parent-position-component', require('./components/invoices/InvoiceParentPositionComponent.vue').default)
     .component('invoice-single-position-component', require('./components/invoices/InvoiceSinglePositionComponent.vue').default)
+    .component('invoice-date-picker', require('./components/invoices/datepicker/InvoiceDatePicker.vue').default)
+    .component('invoice-pay-date-picker', require('./components/invoices/datepicker/InvoicePayDatePicker.vue').default)
 
     //vuex store binding
     .use(store)

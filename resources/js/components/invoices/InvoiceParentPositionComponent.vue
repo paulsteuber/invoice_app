@@ -1,6 +1,6 @@
 <template>
     <div class="new-position col-sm-12">
-        <table class="table">
+        <table class="table table-borderless">
             <thead>
                 <tr>
                 <th scope="col">#</th>

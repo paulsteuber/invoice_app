@@ -62,7 +62,26 @@
     }
 }
 .invoice-create{
-   
+    .card{
+        border: 0px !important;
+    }
+    .card-header{
+        h3{
+            margin-bottom: 0;
+        }
+    }
+    .number-wrapper{
+        position: relative;
+        .warning-message{
+            position: absolute;
+            z-index: 1;
+            font-size: 0.65rem;
+            color: red;
+        }
+    }
+    .new-position{
+        font-size: 0.75rem;
+    } 
     #customer-results{
         & > div{
             position: relative;
