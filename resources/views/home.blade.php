@@ -32,7 +32,10 @@
                         </div>
                         <div class="sales-thisyear col-sm-4">
                             <div class="shadow-sm p-3 bg-white">
-                                <h2>{{$data["thisYear"]["year"]}}</h2>
+                                <div class="d-flex align-items-end">
+                                <h2>Dieses Jahr <span class="">{{$data["thisYear"]["year"]}}</span></h2>
+                                
+                                </div>
                                 <hr class="col-2">
                                 <div class="row">
                                     <div class="col-sm-6 netto">

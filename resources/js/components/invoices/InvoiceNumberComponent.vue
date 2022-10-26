@@ -29,17 +29,17 @@ export default {
         return {
             invoiceNumber: this.nextInvoiceNumber,
             warningMessage: '',
-            warningVisibilityClass : 'warning-message d-none'
+            warningVisibilityClass : 'warning-message d-none',
+            allInvoices: [],
         }
     },
         mounted() {
-            /*
             axios
                 .get('/json/auth/invoices')
                 .then(response => {
-                    this.customers = response.data;
-                })
-            */
+                    this.allInvoices = response.data;
+                });
+            console.log("AX", this.allInvoices)
         },
         methods:{
             numIncrease: function(){

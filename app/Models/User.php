@@ -50,4 +50,7 @@ class User extends Authenticatable
     public function invoices(){
         return $this->hasMany(Invoice::class)->orderBy('invoice_date', 'DESC')->orderBy('invoice_number', 'DESC');
     }
+    public function invoice($id){
+        return $this->hasMany(Invoice::class)->find($id);
+    }
 }

@@ -47,6 +47,7 @@ Route::get('/invoice','InvoicesController@create')->name('invoice.create');
 Route::post('/invoice', 'InvoicesController@store')->name('invoice.store');
 Route::get('/invoice/{invoice_id}/edit', 'InvoicesController@edit')->name('invoice.edit');
 Route::get('/json/auth/invoice/{invoice_id}', 'InvoicesController@show_invoice')->name('invoice.show_invoice');
+Route::get('/json/auth/invoices', 'InvoicesController@show_invoices')->name('invoice.show_invoices');
 Route::patch('/invoice/{invoice_id}', 'InvoicesController@update')->name('invoice.update');
 
 /**

@@ -92,17 +92,26 @@ class InvoicesController extends Controller
     }
     
    public function edit( $invoice_id){
-        //$this->authorize('update', Invoice::find($invoice_id));
+        //$this->authorize('edit', Invoice::find($invoice_id));
         $user = Auth::user();
-        $invoice = Invoice::find($invoice_id);
+        $invoice = $user->invoice($invoice_id);
+        $invoice ===  null ? abort(403): $invoice;
         return view('invoice.edit', compact('user'), compact('invoice'));
     }
     public function show_invoice($invoice_id){
-        //$this->authorize('show_invoice', Invoice::find($invoice_id));
+        $user = Auth::user();
+        $invoice = $user->invoice($invoice_id);
+        $invoice ===  null ? abort(403): $invoice;
         return Invoice::find($invoice_id);
+    }
+    public function show_invoices(){
+        return Auth::user()->invoices;
     }
     public function update($invoice_id)
     {
+        $user = Auth::user();
+        $invoice = $user->invoice($invoice_id);
+        $invoice ===  null ? abort(403): $invoice;
          // validate invoice partial pay
         request()->merge(['invoice_partial_pay' => request()->has('invoice_partial_pay')]);
         /*
@@ -147,8 +156,8 @@ class InvoicesController extends Controller
             'brutto_total' => 'required'
 
            ]);
-           $this_invoice = Invoice::find($invoice_id);
-           $this_invoice->update($data);
+           //$this_invoice = Invoice::find($invoice_id);
+           $invoice->update($data);
            return redirect('/invoices');
     }
 }

@@ -19943,17 +19943,17 @@ __webpack_require__.r(__webpack_exports__);
     return {
       invoiceNumber: this.nextInvoiceNumber,
       warningMessage: '',
-      warningVisibilityClass: 'warning-message d-none'
+      warningVisibilityClass: 'warning-message d-none',
+      allInvoices: []
     };
   },
   mounted: function mounted() {
-    /*
-    axios
-        .get('/json/auth/invoices')
-        .then(response => {
-            this.customers = response.data;
-        })
-    */
+    var _this = this;
+
+    axios.get('/json/auth/invoices').then(function (response) {
+      _this.allInvoices = response.data;
+    });
+    console.log("AX", this.allInvoices);
   },
   methods: {
     numIncrease: function numIncrease() {
