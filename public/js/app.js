@@ -19906,7 +19906,8 @@ __webpack_require__.r(__webpack_exports__);
   props: ["invoice", "mwst", "editRoute"],
   data: function data() {
     return {
-      invoiceData: JSON.parse(this.invoice)
+      invoiceData: JSON.parse(this.invoice),
+      invoice_stateClass: "status-inner"
     };
   },
   methods: {
@@ -19921,6 +19922,7 @@ __webpack_require__.r(__webpack_exports__);
     this.invoiceData.netto_total = (0,_helpers__WEBPACK_IMPORTED_MODULE_1__.printCurrency)(this.invoiceData.netto_total);
     this.invoiceData.brutto_total = (0,_helpers__WEBPACK_IMPORTED_MODULE_1__.printCurrency)(this.invoiceData.brutto_total);
     this.invoiceData.mwst_total = (0,_helpers__WEBPACK_IMPORTED_MODULE_1__.printCurrency)(this.invoiceData.mwst_total);
+    this.invoice_stateClass = this.invoice_stateClass + " " + this.invoiceData.invoice_state;
   },
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -19947,7 +19949,8 @@ __webpack_require__.r(__webpack_exports__);
       invoiceNumber: this.nextInvoiceNumber,
       warningMessage: '',
       warningVisibilityClass: 'warning-message d-none',
-      allInvoiceNumbersArray: this.allInvoiceNumbers.split(",")
+      allInvoiceNumbersArray: this.allInvoiceNumbers.split(","),
+      oldInvoiceNumber: this.nextInvoiceNumber
     };
   },
   mounted: function mounted() {
@@ -19990,15 +19993,34 @@ __webpack_require__.r(__webpack_exports__);
     },
     changeInput: function changeInput(e) {
       var val = e.target.value;
-      var newInvoice = String(val).replace(/\D/g, "");
-      this.invoiceNumber = newInvoice;
+      var oldInvoiceNum = parseInt(this.invoiceNumber);
+      var newInvoiceNum = parseInt(String(val).replace(/\D/g, ""));
 
-      if (val.length !== newInvoice.length) {
+      if (val.length !== String(newInvoiceNum).length) {
         this.warningActive("Nur Ziffern werden übernommen");
+        this.invoiceNumber = oldInvoiceNum;
         return;
       }
 
       this.warningInactive();
+
+      if (this.allInvoiceNumbersArray.includes(String(newInvoiceNum))) {
+        console.log("OLD", this.oldInvoiceNumber, "NEW", newInvoiceNum);
+        console.log(this.oldInvoiceNumber > newInvoiceNum);
+
+        if (newInvoiceNum > this.oldInvoiceNumber) {
+          this.invoiceNumber = newInvoiceNum - 1;
+          newInvoiceNum = this.findNextAllowedNumber(true);
+        }
+
+        if (this.oldInvoiceNumber > newInvoiceNum) {
+          this.invoiceNumber = newInvoiceNum + 1;
+          newInvoiceNum = this.findNextAllowedNumber(false);
+        }
+      }
+
+      this.oldInvoiceNumber = newInvoiceNum;
+      this.invoiceNumber = newInvoiceNum;
     },
     warningInactive: function warningInactive() {
       this.warningVisibilityClass = 'warning-message d-none';
@@ -20829,6 +20851,27 @@ var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 var _hoisted_22 = {
   "class": "status"
 };
+var _hoisted_23 = ["className"];
+
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "draft"
+}, "Entwurf", -1
+/* HOISTED */
+);
+
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "open"
+}, "Offen", -1
+/* HOISTED */
+);
+
+var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "paid"
+}, "Beglichen", -1
+/* HOISTED */
+);
+
+var _hoisted_27 = [_hoisted_24, _hoisted_25, _hoisted_26];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.invoiceData.invoice_date), 1
   /* TEXT */
@@ -20856,9 +20899,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [_hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.invoiceData.brutto_total) + "€ ", 1
   /* TEXT */
-  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.invoiceData.invoice_state), 1
-  /* TEXT */
-  )]);
+  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    className: $data.invoice_stateClass
+  }, _hoisted_27, 8
+  /* PROPS */
+  , _hoisted_23)])]);
 }
 
 /***/ }),
@@ -20893,9 +20938,8 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 var _hoisted_4 = {
   "class": "col-lg-6 number-wrapper"
 };
-var _hoisted_5 = ["placeholder", "value"];
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   width: "16",
   height: "16",
@@ -20910,36 +20954,40 @@ var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_7 = {
+var _hoisted_6 = {
   "class": "col-lg-6 d-flex justify-content-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "form-control",
     type: "text",
     id: "invoice_number",
     name: "invoice_number",
-    placeholder: $data.invoiceNumber,
-    value: $data.invoiceNumber,
-    onKeyup: _cache[0] || (_cache[0] = function () {
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $data.invoiceNumber = $event;
+    }),
+    onKeyup: _cache[1] || (_cache[1] = function () {
+      return $options.changeInput && $options.changeInput.apply($options, arguments);
+    }),
+    onChange: _cache[2] || (_cache[2] = function () {
       return $options.changeInput && $options.changeInput.apply($options, arguments);
     })
-  }, null, 40
-  /* PROPS, HYDRATE_EVENTS */
-  , _hoisted_5), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  }, null, 544
+  /* HYDRATE_EVENTS, NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.invoiceNumber]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)($data.warningVisibilityClass)
-  }, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.warningMessage), 1
+  }, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.warningMessage), 1
   /* TEXT */
   )], 2
   /* CLASS */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     "class": "btn btn-primary",
-    onClick: _cache[1] || (_cache[1] = function ($event) {
+    onClick: _cache[3] || (_cache[3] = function ($event) {
       return $options.numIncrease();
     })
   }, "+"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     "class": "btn btn-outline-primary ml-1",
-    onClick: _cache[2] || (_cache[2] = function ($event) {
+    onClick: _cache[4] || (_cache[4] = function ($event) {
       return $options.numDecrease();
     })
   }, "-")])])]);

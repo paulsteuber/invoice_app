@@ -54,7 +54,12 @@
         </div>
         
         <div class="status">
-            {{invoiceData.invoice_state}}
+            <div :className="invoice_stateClass">
+                <div class="draft">Entwurf</div>
+                <div class="open">Offen</div>
+                <div class="paid">Beglichen</div>
+            </div>
+            
         </div>
         
     </div>
@@ -72,7 +77,8 @@
         
         data (){
             return {
-               invoiceData: JSON.parse(this.invoice)
+               invoiceData: JSON.parse(this.invoice),
+               invoice_stateClass: "status-inner"
             }
         },
         methods:{
@@ -88,7 +94,10 @@
             
             this.invoiceData.netto_total = printCurrency(this.invoiceData.netto_total);
             this.invoiceData.brutto_total = printCurrency(this.invoiceData.brutto_total); 
-            this.invoiceData.mwst_total = printCurrency(this.invoiceData.mwst_total); 
+            this.invoiceData.mwst_total = printCurrency(this.invoiceData.mwst_total);
+            this.invoice_stateClass = this.invoice_stateClass+" "+this.invoiceData.invoice_state;
+
+            
            
         },
         mounted() {

@@ -30,6 +30,31 @@
     .row{
         gap: 30px;
     }
+    .status-inner{
+        font-size: 0.65rem;
+        font-weight: 700;
+        > div{
+            display: none;
+        }
+        &.draft{
+            .draft{
+                display: block;
+                color: var(--cyan)
+            }
+        }
+        &.open{
+            .open{
+                display: block;
+                color: var(--primary);
+            }
+        }
+        &.paid{
+            .paid{
+                display: block;
+                color: var(--success);
+            }
+        }
+    }
 }
 .sum-table{
     .netto-sum, .brutto-sum{

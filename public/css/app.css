@@ -9385,6 +9385,25 @@ body {
 .invoice-list .row {
   gap: 30px;
 }
+.invoice-list .status-inner {
+  font-size: 0.65rem;
+  font-weight: 700;
+}
+.invoice-list .status-inner > div {
+  display: none;
+}
+.invoice-list .status-inner.draft .draft {
+  display: block;
+  color: var(--cyan);
+}
+.invoice-list .status-inner.open .open {
+  display: block;
+  color: var(--primary);
+}
+.invoice-list .status-inner.paid .paid {
+  display: block;
+  color: var(--success);
+}
 
 .sum-table .netto-sum, .sum-table .brutto-sum {
   font-weight: 700;
