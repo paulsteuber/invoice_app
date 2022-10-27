@@ -19846,18 +19846,21 @@ __webpack_require__.r(__webpack_exports__);
     axios.get('/json/auth/customers').then(function (response) {
       _this.customers = response.data;
     });
-    axios.get('/json/auth/invoice/' + this.oldInvoiceId).then(function (response) {
-      _this.selectedcustomer = {
-        id: response.data.customer_id,
-        name: response.data.customer_name,
-        alias_name: response.data.customer_alias,
-        city: response.data.customer_city,
-        street: response.data.customer_street,
-        zip: response.data.customer_zip,
-        mail: response.data.customer_mail,
-        website: response.data.customer_website
-      };
-    });
+
+    if (this.oldInvoiceId) {
+      axios.get('/json/auth/invoice/' + this.oldInvoiceId).then(function (response) {
+        _this.selectedcustomer = {
+          id: response.data.customer_id,
+          name: response.data.customer_name,
+          alias_name: response.data.customer_alias,
+          city: response.data.customer_city,
+          street: response.data.customer_street,
+          zip: response.data.customer_zip,
+          mail: response.data.customer_mail,
+          website: response.data.customer_website
+        };
+      });
+    }
   },
   methods: {
     selectCustomer: function selectCustomer(clicked_customer) {
@@ -19938,26 +19941,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['nextInvoiceNumber'],
+  props: ['nextInvoiceNumber', 'allInvoiceNumbers'],
   data: function data() {
     return {
       invoiceNumber: this.nextInvoiceNumber,
       warningMessage: '',
       warningVisibilityClass: 'warning-message d-none',
-      allInvoices: []
+      allInvoiceNumbersArray: this.allInvoiceNumbers.split(",")
     };
   },
   mounted: function mounted() {
-    var _this = this;
-
-    axios.get('/json/auth/invoices').then(function (response) {
-      _this.allInvoices = response.data;
-    });
-    console.log("AX", this.allInvoices);
+    console.log("ALL", this.allInvoiceNumbers);
   },
   methods: {
     numIncrease: function numIncrease() {
-      this.invoiceNumber++;
+      var nextValidNum = this.findNextAllowedNumber(true);
+      this.invoiceNumber = nextValidNum;
     },
     numDecrease: function numDecrease() {
       if (this.invoiceNumber === 1) {
@@ -19965,15 +19964,29 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      this.invoiceNumber--;
+      var nextValidNum = this.findNextAllowedNumber(false);
+      this.invoiceNumber = nextValidNum;
     },
-    checkInvoiceNumberExists: function checkInvoiceNumberExists() {
-      /*axios
-          .get('/json/auth/invoices')
-          .then(response => {
-              this.customers = response.data;
-          })
-      */
+    findNextAllowedNumber: function findNextAllowedNumber(increase) {
+      if (increase) {
+        var numIncreased = parseInt(this.invoiceNumber) + 1;
+
+        while (this.allInvoiceNumbersArray.includes(String(numIncreased))) {
+          numIncreased++;
+        }
+
+        return numIncreased;
+      }
+
+      if (!increase) {
+        var numDecreased = parseInt(this.invoiceNumber) - 1;
+
+        while (this.allInvoiceNumbersArray.includes(String(numDecreased))) {
+          numDecreased--;
+        }
+
+        return numDecreased;
+      }
     },
     changeInput: function changeInput(e) {
       var val = e.target.value;

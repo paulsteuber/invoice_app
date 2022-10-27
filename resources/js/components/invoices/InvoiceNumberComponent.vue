@@ -23,43 +23,48 @@
 
 export default {
     props:[
-        'nextInvoiceNumber'
+        'nextInvoiceNumber',
+        'allInvoiceNumbers'
     ],
     data () {
         return {
             invoiceNumber: this.nextInvoiceNumber,
             warningMessage: '',
             warningVisibilityClass : 'warning-message d-none',
-            allInvoices: [],
+            allInvoiceNumbersArray: this.allInvoiceNumbers.split(",")
         }
     },
         mounted() {
-            axios
-                .get('/json/auth/invoices')
-                .then(response => {
-                    this.allInvoices = response.data;
-                });
-            console.log("AX", this.allInvoices)
+            console.log("ALL", this.allInvoiceNumbers )
         },
         methods:{
             numIncrease: function(){
-                this.invoiceNumber++;
+                const nextValidNum = this.findNextAllowedNumber(true);
+                this.invoiceNumber = nextValidNum;
             },
             numDecrease: function(){
                 if(this.invoiceNumber === 1){
                     console.log("Negative Rechnungsnummer ist nicht erlaubt");
                     return;
                 }
-                this.invoiceNumber--;
-
+                const nextValidNum = this.findNextAllowedNumber(false);
+                this.invoiceNumber = nextValidNum;
             },
-            checkInvoiceNumberExists: function(){
-            /*axios
-                .get('/json/auth/invoices')
-                .then(response => {
-                    this.customers = response.data;
-                })
-            */
+            findNextAllowedNumber: function(increase){
+                if(increase){
+                    let numIncreased = parseInt(this.invoiceNumber)+1;
+                    while(this.allInvoiceNumbersArray.includes(String(numIncreased))){
+                        numIncreased++;
+                    }
+                    return numIncreased;
+                }
+                if(!increase){
+                    let numDecreased = parseInt(this.invoiceNumber)-1;
+                    while(this.allInvoiceNumbersArray.includes(String(numDecreased))){
+                        numDecreased--;
+                    }
+                    return numDecreased;
+                }
             },
             changeInput: function(e) {
                 const val = e.target.value;

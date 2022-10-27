@@ -45,11 +45,7 @@ class InvoicesController extends Controller
     {
         // validate invoice partial pay
         request()->merge(['invoice_partial_pay' => request()->has('invoice_partial_pay')]);
-       /*  request()->merge([
-            'invoice_partial_pay' => strcmp(request()->invoice_partial_pay, 'true') || strcmp(request()->invoice_partial_pay, '1') ? 1 : 0,
-         ]);
-        
-        */
+       
         $data=request()->validate([
             //CUSTOMER INFORMATIONS
             'customer_id' => 'required',

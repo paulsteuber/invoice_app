@@ -119,7 +119,8 @@ export default {
                 .then(response => {
                     this.customers = response.data;
                 });
-            axios
+            if(this.oldInvoiceId){
+                axios
                 .get('/json/auth/invoice/'+this.oldInvoiceId)
                 .then(response => {
                     this.selectedcustomer = {
@@ -132,7 +133,9 @@ export default {
                         mail: response.data.customer_mail,
                         website: response.data.customer_website 
                     }
-                })
+                });
+            }
+            
         },
         methods:{
             selectCustomer: function(clicked_customer){

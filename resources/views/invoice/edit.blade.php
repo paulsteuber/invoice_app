@@ -8,7 +8,6 @@
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h3 class="h6 fw-bolder">{{ __('Rechnung bearbeiten') }}</h3>
                 </div>
-
                 <div class="card-body row">
                    <div class="col-md-12">
                        @if ($user->profile)
@@ -207,7 +206,7 @@
                                         <h2 class="h6 fw-bolder mb-0">{{__('Rechnungseinstellungen')}}</h2>
                                     </div>
                                     <div class="card-body row">
-                                       <invoice-number-component next-invoice-number="{{$invoice->invoice_number}}"></invoice-number-component> 
+                                       <invoice-number-component next-invoice-number="{{$invoice->invoice_number}}" all-invoice-numbers="{{$user->invoice_numbers()}}"></invoice-number-component> 
 
                                         <div class="form-group col-lg-6">
                                             <div class="row">

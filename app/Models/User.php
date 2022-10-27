@@ -53,4 +53,8 @@ class User extends Authenticatable
     public function invoice($id){
         return $this->hasMany(Invoice::class)->find($id);
     }
+    public function invoice_numbers(){
+        $numbers = $this->hasMany(Invoice::class)->get("invoice_number")->pluck("invoice_number")->toArray();
+        return implode(",",$numbers);
+    }
 }

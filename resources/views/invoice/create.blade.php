@@ -205,7 +205,7 @@
                                         <h2 class="h5">{{__('Rechnungseinstellungen')}}</h2>
                                     </div>
                                     <div class="card-body row">
-                                       <invoice-number-component next-invoice-number={{$nextInvoiceNumber}}></invoice-number-component> 
+                                    <invoice-number-component next-invoice-number="{{$nextInvoiceNumber}}" all-invoice-numbers="{{$user->invoice_numbers()}}"></invoice-number-component> 
 
                                         <div class="form-group col-lg-6">
                                             <div class="row">
