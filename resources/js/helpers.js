@@ -14,8 +14,8 @@ export function addBracketsToArrayString(val){
     return val;
 }
 export function parseToJsonArray(val) {
-    const uniqueDivider = "#"
-    const addDivider = String(val).replace("}{", "}"+uniqueDivider+"{");
+    const uniqueDivider = "###"
+    const addDivider = String(val).split("}{").join("}"+uniqueDivider+"{");
     const json = JSON.parse("["+String(addDivider.split(uniqueDivider)+"]"));
     return json;
 } 

@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { toFloat, printCurrency } from '../../helpers';
+import { toFloat, printCurrency } from '../../../helpers';
 import { mapGetters, mapMutations } from 'vuex';
 
     export default {

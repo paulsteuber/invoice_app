@@ -22,15 +22,17 @@ app
     .component('customer-invoice-header-component', require('./components/layout/CustomerInvoiceHeaderComponent.vue').default)
     //INVOICES
     .component('customer-component', require('./components/invoices/CustomerComponent.vue').default)
-    .component('invoice-number-component', require('./components/invoices/InvoiceNumberComponent.vue').default)
+    .component('invoice-number-component', require('./components/invoices/edit/InvoiceNumberComponent.vue').default)
     .component('invoice-partial-pay-component', require('./components/invoices/PartialPayComponent.vue').default)
     .component('invoice-list-element-component', require('./components/invoices/InvoiceListElementComponent.vue').default)
+    .component('invoice-list-container', require('./components/invoices/InvoiceListContainer.vue').default)
+    .component('invoice-filter-container', require('./components/invoices/index/InvoiceFilterContainer.vue').default)
+    .component('invoice-date-picker', require('./components/invoices/edit/InvoiceDatePicker.vue').default)
+    .component('invoice-pay-date-picker', require('./components/invoices/edit/InvoicePayDatePicker.vue').default)
     //customers
     .component('customer-overview-component', require('./components/customers/CustomerOverviewComponent.vue').default)
-    .component('invoice-parent-position-component', require('./components/invoices/InvoiceParentPositionComponent.vue').default)
-    .component('invoice-single-position-component', require('./components/invoices/InvoiceSinglePositionComponent.vue').default)
-    .component('invoice-date-picker', require('./components/invoices/datepicker/InvoiceDatePicker.vue').default)
-    .component('invoice-pay-date-picker', require('./components/invoices/datepicker/InvoicePayDatePicker.vue').default)
+    .component('invoice-parent-position-component', require('./components/invoices/edit/InvoiceParentPositionComponent.vue').default)
+    .component('invoice-single-position-component', require('./components/invoices/edit/InvoiceSinglePositionComponent.vue').default)
 
     //vuex store binding
     .use(store)

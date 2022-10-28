@@ -67,7 +67,7 @@
 </template>
 
 <script>   
-    import { toFloat, parseToJsonArray } from '../../helpers';
+    import { toFloat, parseToJsonArray } from '../../../helpers';
     import { mapGetters, mapMutations } from 'vuex';
     export default {
         props:[

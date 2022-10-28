@@ -1,5 +1,5 @@
 <template>
-    <div class="col-md-3 invoice-list-element shadow-sm">
+    <div>
         <div class="d-flex flex-column align-items-start">
             <div class="full-width d-flex justify-content-between">
                 <div class="date d-flex align-items-center">
@@ -49,7 +49,7 @@
             </div>
             <div class="brutto d-flex flex-column">
                 <span>Brutto</span>
-                {{invoiceData.brutto_total}}€
+                <div class="h6">{{invoiceData.brutto_total}}€</div>
             </div>
         </div>
         
@@ -59,9 +59,7 @@
                 <div class="open">Offen</div>
                 <div class="paid">Beglichen</div>
             </div>
-            
         </div>
-        
     </div>
 </template>
 
@@ -71,14 +69,14 @@
     export default {
         props:[
         "invoice",
-        "mwst",
-        "editRoute"
+       // "mwst",
         ],
         
         data (){
             return {
-               invoiceData: JSON.parse(this.invoice),
-               invoice_stateClass: "status-inner"
+                invoiceData: this.invoice,
+                invoice_stateClass: "status-inner",
+                editRoute:"",
             }
         },
         methods:{
@@ -88,7 +86,7 @@
 
         }, 
         created(){
-            this.invoiceData.invoice_date = dateToString(splitDateString(this.invoiceData.invoice_date));
+            this.invoiceData.invoice_date = dateToString(splitDateString(this.invoice.invoice_date)); 
             this.invoiceData.customer_name_short = this.invoiceData.customer_name.length > 25 ? this.invoiceData.customer_name.substring(0, 23)+"...": this.invoiceData.customer_name;
             this.invoiceData.invoice_description_short = this.invoiceData.invoice_description.length > 25 ? this.invoiceData.invoice_description.substring(0, 23)+"...": this.invoiceData.invoice_description;
             
@@ -96,12 +94,13 @@
             this.invoiceData.brutto_total = printCurrency(this.invoiceData.brutto_total); 
             this.invoiceData.mwst_total = printCurrency(this.invoiceData.mwst_total);
             this.invoice_stateClass = this.invoice_stateClass+" "+this.invoiceData.invoice_state;
+            this.editRoute = "/invoice/"+this.invoiceData.id+"/edit";
 
             
            
         },
         mounted() {
-            console.log('Component mounted.')
+            //console.log('Component mounted.', this.invoice)
         }
        
     }
